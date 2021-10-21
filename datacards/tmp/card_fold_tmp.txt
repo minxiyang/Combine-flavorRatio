@@ -1,0 +1,24 @@
+imax 2 numbbr of bins
+jmax 2 numbbr of processes minus 1
+kmax * numbbr of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *                   control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS
+shapes el_DY               control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS el_cg_$PROCESS$SYSTEMATIC
+shapes el_Other            control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS el_cg_$PROCESS$SYSTEMATIC
+shapes *                   signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS
+shapes mu_DY               signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS el_cg_$PROCESS$SYSTEMATIC
+shapes mu_Other            signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_cg_$PROCESS el_cg_$PROCESS$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------------
+bin          signal        control
+observation  nev_mu_obs    nev_el_obs   
+----------------------------------------------------------------------------------------------------------------------------------
+bin                               signal              signa              control            control                        
+process                           mu_DY               mu_Other           el_DY              el_Other             
+process                           0                   1                  1                  2                     
+rate                              nev_el_dy           nev_mu_o           nev_el_dy          nev_mu_o 
+----------------------------------------------------------------------------------------------------------------------------------
+elscale                 shape     -                   -                  1.0                1.0                 
+muscale                 shape     1.0                 1.0                -                  -                   
+reso                    shape     1.0                 1.0                -                  -                                       
+----------------------------------------------------------------------------------------------------------------------------------              
+R1                  rateParam     signal              mu_DY            acc_eff             [acc_eff_up, acc_eff_down]    
