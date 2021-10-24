@@ -47,7 +47,7 @@ def plot(flavor, year, cg, massCut):
         #print(flavor+'_'+year+'_'+cg+"run")
         if key == flavor+'_'+year+'_'+cg:
             data=[]
-            f=open("Data/"+file_,"r")
+            f=open("dataList/"+file_,"r")
             for m in f:
 
                 m=float(m)
@@ -65,7 +65,7 @@ def plot(flavor, year, cg, massCut):
 
     if flavor=="el":histName_other='DielectronMass_'+cg
     else: histName_other="DimuonMassVertexConstrained_"+cg
-    f_other=ROOT.TFile.Open("dataCollection/"+other_file,"r")
+    f_other=ROOT.TFile.Open("MC/"+other_file,"r")
     otherHist=f_other.Get(histName_other)
     #otherHist.SetDirectory(0)
     otherHist=otherHist.Rebin(len(bng)-1,'other_mc' ,bng)
@@ -75,7 +75,7 @@ def plot(flavor, year, cg, massCut):
     
     if flavor=="el":histName_dy='DielectronResponse_'+cg
     else: histName_dy="DimuonResponse_"+cg
-    f_dy=ROOT.TFile.Open("dataCollection/"+dy_file,"r")
+    f_dy=ROOT.TFile.Open("MC/"+dy_file,"r")
     dyHist2D=f_dy.Get(histName_dy)
     dyHist2D.SetDirectory(0)
     f_dy.Close()

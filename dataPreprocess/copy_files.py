@@ -1,5 +1,5 @@
 import os
-from Variables import crossSections
+from Parameters import crossSections
 
 
 path="/depot/cms/users/schul105/forMinxi/"

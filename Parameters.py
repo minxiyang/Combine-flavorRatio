@@ -1,14 +1,14 @@
 
 zScale = {
-        "electrons":[0.895176,0.902374,0.874569],
+        "electrons":(0.895176,0.902374,0.874569),
         "muons":1.0282
 }
 zScale2018 = {
-        "electrons":[0.946127,0.949371,0.938017],
+        "electrons":(0.946127,0.949371,0.938017),
         "muons":1.0062
 }
 zScale2016 = {
-        "electrons":[0.951472,0.950691,0.953648],
+        "electrons":(0.951472,0.950691,0.953648),
         "muons":0.9727
         # ~ "muons":1.0
 }
@@ -17,10 +17,10 @@ lumi_el = {"2016":35.9*1000, "2017":41.529*1000, "2018":59.97*1000}
 lumi_mu = {"2016":36.3*1000, "2017":42.135*1000, "2018":61.608*1000}
 
 
-sys_uncers_el=['MassScaleUp', 'MassScaleDown']
-sys_uncers_mu=['Smear', 'MassScaleUp', 'MassScaleDown']
-
-data_files=["dimuon_Mordion2017_BB.txt",  "eventList_ele_2016_BB.txt",  "eventList_ele_2017_BB.txt",  "eventList_ele_2018_BB.txt", "event_list_2017_bb_clean_sort.txt",    "event_list_2018_bb_clean_sort.txt",  "dimuon_Mordion2017_BE.txt",  "eventList_ele_2016_BE.txt",  "eventList_ele_2017_BE.txt",  "eventList_ele_2018_BE.txt",  "event_list_2017_beee_clean_sort.txt",  "event_list_2018_beee_clean_sort.txt"]
+sys_uncers={"el":('MassScaleUp', 'MassScaleDown' ,'PrefireUp', 'PrefireDown', 'PUScaleUp', 'PUScaleDown'), "mu":('Smear', 'MassScaleUp', 'MassScaleDown', 'MuonID')}
+shape_corr=("2016bb_MuonID","2016be_MuonID","2017be_MuonID","2018be_MuonID","2016bb_Smear","2016be_Smear", "2017be_Smear", "2018be_Smear", "2016bbbe_muMassScale", "2016bb_elMassScale", "2016be_elMassScale", "2017bb_elMassScale", "2017be_elMassScale", "2018bb_elMassScale", "2018be_elMassScale")
+eff_corr={"effbb":"1.06","effbe":"1.08","trig2016bb":"1.003","trig2016be":"1.007","trig2017bb":"1.01","trig2017be":"1.01","trig2018bb":"1.01","trig2018be":"1.01"}
+data_files=("dimuon_Mordion2017_BB.txt",  "eventList_ele_2016_BB.txt",  "eventList_ele_2017_BB.txt",  "eventList_ele_2018_BB.txt", "event_list_2017_bb_clean_sort.txt",    "event_list_2018_bb_clean_sort.txt",  "dimuon_Mordion2017_BE.txt",  "eventList_ele_2016_BE.txt",  "eventList_ele_2017_BE.txt",  "eventList_ele_2018_BE.txt",  "event_list_2017_beee_clean_sort.txt",  "event_list_2018_beee_clean_sort.txt")
 
 
 crossSections = {
