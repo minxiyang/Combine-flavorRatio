@@ -3,6 +3,7 @@ from func.writeDatacards import writeDatacards
 from func.getAccEffAndErr import getAccEffAndErr
 from func.runCB import runCB
 from plotting.plotNll import plotNll
+from plotting.plotTmps import plotTmps
 from Parameters import sys_uncers 
 import os
 
@@ -25,7 +26,9 @@ def main():
             acc_eff = getAccEffAndErr(year, cg, massCut)
             tmps=tmpHandle(year, cg)
             tmps.createTmps(massCut, sys_uncers)
+
             tmps.saveTmps(tmpName)
+            plotTmps(year, cg, tmps.templates)
             writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
             runCB(scanRange, fileName, cardName)
             inputs={"result":fileName}
