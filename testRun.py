@@ -4,6 +4,7 @@ from func.getAccEffAndErr import getAccEffAndErr
 from func.runCB import runCB
 from plotting.plotNll import plotNll
 from plotting.plotTmps import plotTmps
+from plotting.plotImpact import plotImpact
 from Parameters import sys_uncers 
 import os
 
@@ -33,12 +34,14 @@ def main():
             runCB(scanRange, fileName, cardName)
             inputs={"result":fileName}
             plotNll(year, cg, massCut, False, plotName, **inputs)
+            impactOut="Impact_"+year+"_"+cg+"_test"
+            plotImpact(cardName, impactOut)
             
             
     runCB(scanRange, "allYearCombine", *cardNames)
     inputs={"result":"allYearCombine"}
     plotNll("All year", "all category", massCut, False, "allYearCombine", **inputs)
-    
+    plotImpact("combinedCard", "allYearCombine_test")
         
 
 if __name__=="__main__":
