@@ -1,9 +1,10 @@
 import ROOT
 import numpy as np
 from func.average import average
+from func.getAccEffAndErr import getAccEffAndErr
 import numpy as np
 
-def plotTmps(year, cg, tmps, fr=1.):
+def plotTmps(year, cg, massCut, tmps, fr=1.):
 
     ROOT.gStyle.SetOptStat(0)
     
@@ -15,10 +16,13 @@ def plotTmps(year, cg, tmps, fr=1.):
         dy_bkg=tmps[flavor+'_DY_B'].Clone()
         otherHist=tmps[flavor+'_Other'].Clone()
         dataHist=tmps[flavor+'_data_obs'].Clone()
+        acceffs=getAccEffAndErr(year, cg, massCut)
+        acceff=acceffs[0]
         average(dataHist)
         average(otherHist)
         average(dy_sig)
         average(dy_bkg)
+        if flavor == "mu": dy_sig.Scale(acceff)
         ly=ROOT.TLegend(0.55,0.7,0.9,0.9)
         otherHist.SetFillColor(ROOT.kYellow)
         dy_bkg.SetFillColor(ROOT.kGreen)
@@ -44,7 +48,7 @@ def plotTmps(year, cg, tmps, fr=1.):
         Stack.GetXaxis().SetLabelSize(0.0)
         Stack.GetXaxis().SetMoreLogLabels()
         Stack.SetMinimum(1e-3)
-        Stack.SetMaximum(5e1)
+        Stack.SetMaximum(3e2)
         if flavor == "el": Stack.SetTitle("dielectron"+" "+year+" "+cg)
         else: Stack.SetTitle("dimuon"+" "+year+" "+cg)
         dataHist.SetMarkerStyle(8)
@@ -84,12 +88,12 @@ def plotTmps(year, cg, tmps, fr=1.):
             ratioHist.SetBinError(i, err)
         
         ratioHist.Draw("p")
-        treLine = ROOT.TLine(400, 1.0, 3500, 1.0)
+        treLine = ROOT.TLine(300, 1.0, 3500, 1.0)
         treLine.SetLineStyle(2)
         treLine.Draw()
         c.Update()
-        if fr==1: plotName = flavor+"_"+year+"_"+cg+"_template.pdf"
-        else: plotName = flavor+"_"+year+"_"+cg+"_"+str(fr)+"fr"+"_template.pdf"
+        if fr==1: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_template.pdf"
+        else: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_"+str(fr)+"fr"+"_template.pdf"
         c.Print("plots/templates/"+plotName)
 
 

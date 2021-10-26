@@ -28,7 +28,7 @@ def main():
             tmps.createTmps(massCut, sys_uncers)
 
             tmps.saveTmps(tmpName)
-            plotTmps(year, cg, tmps.templates)
+            plotTmps(year, cg, massCut, tmps.templates)
             writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
             runCB(scanRange, fileName, cardName)
             inputs={"result":fileName}

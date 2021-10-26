@@ -18,7 +18,7 @@ class tmpHandle(object):
         
         for flavor in ['mu', 'el']:
         
-            bng=getBngs(flavor, self.year, self.cg, 400)
+            bng=getBngs(flavor, self.year, self.cg, 300)
             dy_file='DY_'+flavor+'_'+self.year+'.root'
 
             if flavor=='el':histName_dy='DielectronResponse_'+self.cg
