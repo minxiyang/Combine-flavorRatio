@@ -3,6 +3,7 @@ import numpy as np
 from func.average import average
 import numpy as np
 from plotting.setTDRStyle import setTDRStyle
+from Parameters import lumi_el, lumi_mu
 
 def plotTmps(year, cg, massCut, tmps, fr=1.):
 
@@ -34,7 +35,7 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         Stack.Add(dy_sig)
         c=ROOT.TCanvas("c","c",800,800)
         plotPad = ROOT.TPad("plotPad","plotPad",0,0.25,1,1)
-        ratioPad = ROOT.TPad("ratioPad","ratioPad",0,0,1,0.25)
+        ratioPad = ROOT.TPad("ratioPad","ratioPad",0,0,1,0.35)
         setTDRStyle()
         plotPad.UseCurrentStyle()
         ratioPad.UseCurrentStyle()
@@ -43,6 +44,7 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         plotPad.cd()
         plotPad.SetLogy()
         plotPad.SetLogx()
+        plotPad.SetBottomMargin(0.14)
         Stack.Draw("hist")
         Stack.GetYaxis().SetTitle('Event/GeV')
         Stack.GetXaxis().SetLabelSize(0.0)
@@ -54,10 +56,11 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         dataHist.SetMarkerStyle(8)
         dataHist.SetLineColor(1)
         dataHist.Draw("samep")
+        ly.SetBorderSize(0)
         ly.Draw()
         ratioPad.cd()
         ratioPad.SetLogx()
-        ratioPad.SetTopMargin(0.05)
+        ratioPad.SetTopMargin(0.0001)
         ratioPad.SetBottomMargin(0.25)
         ratioHist=dataHist.Clone()
         ratioHist.SetTitle(" ")
@@ -91,9 +94,26 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         treLine = ROOT.TLine(300, 1.0, 3500, 1.0)
         treLine.SetLineStyle(2)
         treLine.Draw()
-        c.Update()
+        plotPad.cd()
+        latexCMS = ROOT.TLatex()
+        latexCMS.SetTextSize(0.06)
+        latexCMS.SetNDC(True)
+        latexCMSExtra = ROOT.TLatex()
+        yLabelPos = 0.84
+        latexCMSExtra.SetTextSize(0.045)
+        latexCMSExtra.SetNDC(True)
+        cmsExtra = "Preliminary"
+        latex=ROOT.TLatex()
+        latex.SetNDC(True)
+        latex.SetTextSize(0.025)
+        latexCMS.DrawLatex(0.17,0.9,"CMS")
+        latexCMSExtra.DrawLatex(0.17,yLabelPos,"%s"%(cmsExtra))
+        latex.SetTextSize(0.02)
+        if year in lumi_mu.keys(): latex.DrawLatex(0.67, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
+        else: latex.DrawLatex(0.67, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
         if fr==1: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_template.pdf"
         else: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_"+str(fr)+"fr"+"_template.pdf"
+        c.Update()
         c.Print("plots/templates/"+plotName)
 
 
