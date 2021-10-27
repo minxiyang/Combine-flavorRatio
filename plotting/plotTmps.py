@@ -1,8 +1,8 @@
 import ROOT
 import numpy as np
 from func.average import average
-from func.getAccEffAndErr import getAccEffAndErr
 import numpy as np
+from plotting.setTDRStyle import setTDRStyle
 
 def plotTmps(year, cg, massCut, tmps, fr=1.):
 
@@ -16,13 +16,10 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         dy_bkg=tmps[flavor+'_DY_B'].Clone()
         otherHist=tmps[flavor+'_Other'].Clone()
         dataHist=tmps[flavor+'_data_obs'].Clone()
-        acceffs=getAccEffAndErr(year, cg, massCut)
-        acceff=acceffs[0]
         average(dataHist)
         average(otherHist)
         average(dy_sig)
         average(dy_bkg)
-        if flavor == "mu": dy_sig.Scale(acceff)
         ly=ROOT.TLegend(0.55,0.7,0.9,0.9)
         otherHist.SetFillColor(ROOT.kYellow)
         dy_bkg.SetFillColor(ROOT.kGreen)
@@ -38,6 +35,9 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         c=ROOT.TCanvas("c","c",800,800)
         plotPad = ROOT.TPad("plotPad","plotPad",0,0.25,1,1)
         ratioPad = ROOT.TPad("ratioPad","ratioPad",0,0,1,0.25)
+        setTDRStyle()
+        plotPad.UseCurrentStyle()
+        ratioPad.UseCurrentStyle()
         plotPad.Draw()
         ratioPad.Draw()
         plotPad.cd()
@@ -68,9 +68,9 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         ratioHist.GetXaxis().SetTitle('Reco Mass [GeV]')
         ratioHist.GetXaxis().SetMoreLogLabels()
         ratioHist.GetXaxis().SetTitleSize(0.08)
-        ratioHist.GetYaxis().SetTitleSize(0.08)
+        ratioHist.GetYaxis().SetTitleSize(0.1)
         ratioHist.GetYaxis().SetTitleOffset(0.4)
-        ratioHist.GetXaxis().SetTitleOffset(1.1)
+        #ratioHist.GetXaxis().SetTitleOffset(1.1)
         ratioHist.GetYaxis().SetNdivisions(502)
         tempHist=dy_sig.Clone()
         tempHist.Add(dy_bkg)

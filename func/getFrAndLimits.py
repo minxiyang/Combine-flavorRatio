@@ -12,13 +12,15 @@ def getFrAndLimits(rootFile):
     idx=np.argmin(nll)
     r_min=r[idx]
     r1=r2=r3=r4=0
- 
-    for i in range(1,min(len(r)-idx, idx)):
-        #print(nll[idx-i])
-        if nll[idx-i]<1:r1=r[idx-i] 
-        elif nll[idx-i]<4: r3=r[idx-i]
-        if nll[idx+i]<1: r2=r[idx+i]
-        elif nll[idx+i]<4: r4=r[idx+i]
+    #rpre=r[1]
+    #ids=np.argsort(nll)
+    #nll=np.sort(nll) 
+    for i in range(1, len(r)-1):
+        
+        if nll[i]>1 and nll[i+1]<1:r1=r[i+1] 
+        if nll[i]>4 and nll[i+1]<4: r3=r[i+1]
+        if nll[i]<1 and nll[i+1]>1: r2=r[i]
+        if nll[i]<4 and nll[i+1]>4: r4=r[i]
         
      
     f.Close()

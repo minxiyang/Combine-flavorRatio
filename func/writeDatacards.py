@@ -24,8 +24,8 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff):
     nev_mu_o=templates['mu_Other'].Integral()
     tmptxt=tmptxt.replace('nev_mu_o',str(nev_mu_o))    
     tmptxt=tmptxt.replace('acc_eff_med',str(acc_eff[0]))
-    tmptxt=tmptxt.replace('acc_eff_low',str(acc_eff[1]))
-    tmptxt=tmptxt.replace('acc_eff_high',str(acc_eff[2]))
+    tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
+    #tmptxt=tmptxt.replace('acc_eff_high',str(acc_eff[2]))
     Effv=eff_corr["eff"+cg]
     tmptxt=tmptxt.replace('Effv',Effv)
     trigkey="trig"+year+cg
@@ -33,6 +33,8 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff):
     tmptxt=tmptxt.replace('trig',trigkey)
     tmptxt=tmptxt.replace('Trigv',Trigv)
     tmptxt=tmptxt.replace('R1','R'+year+cg)
+    tmptxt=tmptxt.replace('Rmu','Rmu'+year+cg)
+    tmptxt=tmptxt.replace('Rel','Rel'+year+cg)
     for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID"]:
         for key in templates.keys():
             

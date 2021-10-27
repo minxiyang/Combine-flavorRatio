@@ -17,7 +17,7 @@ observation  nev_mu_obs    nev_el_obs
 bin                               signal              signal              signal              control              control             control           
 process                           mu_DY_S             mu_DY_B             mu_Other            el_DY_S              el_DY_B             el_Other
 process                           0                   1                   2                   1                    2                   3  
-rate                              nev_el_dy_s         nev_mu_dy_b         nev_mu_o            nev_el_dy_s          nev_el_dy_b         nev_el_o           
+rate                              1.0                 nev_mu_dy_b         nev_mu_o            1.0                  nev_el_dy_b         nev_el_o           
 -----------------------------------------------------------------------------------------------------------------------------------------------
 _elMassScale             shape     -                   -                  -                   1.0                  1.0                  1.0
 _muMassScale             shape     1.0                 1.0                1.0                 -                    -                    -
@@ -27,5 +27,8 @@ _PUScale                 shape     -                   -                  -     
 _MuonID                  shape     1.0                 1.0                1.0                 -                    -                    -
 _trig                    lnN       -                   Trigv              Trigv               -                    -                    -
 _eff                     lnN       Effv                -                  -                   Effv                 Effv                 Effv
+R1                       param     acc_eff_med         acc_eff_err
 -----------------------------------------------------------------------------------------------------------------------------------------------              
-R1                  rateParam     signal              mu_DY_S            acc_eff_med         [acc_eff_low,acc_eff_high]    
+R1                  rateParam     signal              mu_DY_S            acc_eff_med
+Rmu                 rateParam     signal              mu_DY_S            (@0) Rel 
+Rel                 rateParam     control             el_DY_S            nev_el_dy_s             

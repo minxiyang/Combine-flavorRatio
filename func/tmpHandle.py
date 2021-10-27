@@ -11,7 +11,7 @@ class tmpHandle(object):
          self.year=year
          self.cg=cg
     
-    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1.):
+    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1., chan="mu"):
 
         print("create templates for %s %s"%(self.year, self.cg) )
         templates={}
@@ -134,7 +134,7 @@ class tmpHandle(object):
                 dataHist=ROOT.TH1D(flavor+'_data_obs', flavor+'_data_obs', len(bng)-1,bng)
                 dataHist.Add(templates[flavor+'_DY_B'])
                 dataHist.Add(templates[flavor+'_Other'])
-                if flavor=="mu": dataHist.Add(templates[flavor+'_DY_S'], fr)
+                if flavor==chan: dataHist.Add(templates[flavor+'_DY_S'], fr)
                 else: dataHist.Add(templates[flavor+'_DY_S'])
 
             templates[flavor+'_data_obs']=dataHist.Clone()
@@ -149,13 +149,16 @@ class tmpHandle(object):
         nev_mu_dy_s=self.templates['mu_DY_S'].Integral()
 
         for key in self.templates.keys():
-            if 'mu_DY_S' in key: self.templates[key].Scale(nev_el_dy_s/nev_mu_dy_s)
+            if 'mu_DY_S' in key: self.templates[key].Scale(1.0/nev_mu_dy_s)
+            elif 'el_DY_S' in key: self.templates[key].Scale(1.0/nev_el_dy_s)
 
         tempFiles=ROOT.TFile.Open("templates/"+tmpName+".root","RECREATE")
         for key in self.templates.keys(): self.templates[key].Write()
         tempFiles.Save()
         tempFiles.Close()
-
+        for key in self.templates.keys():
+            if 'mu_DY_S' in key: self.templates[key].Scale(nev_mu_dy_s)
+            elif 'el_DY_S' in key: self.templates[key].Scale(nev_el_dy_s)
     def loadTmps(self, tmpName, sys_uncers):
 
         print('load templates '+tmpName)

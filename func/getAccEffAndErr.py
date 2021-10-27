@@ -24,6 +24,6 @@ def getAccEffAndErr(year, cg, massCut):
     acc_eff=n_mu/n_el
     err=acc_eff*np.sqrt((err_mu/n_mu)**2+(err_el/n_el)**2)
 
-    return (acc_eff, acc_eff-err, acc_eff+err)
+    return (acc_eff, err)
     
     

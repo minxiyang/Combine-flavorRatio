@@ -25,7 +25,7 @@ def runCB(scanRange, output, *args):
         datacard=args[0]
         print("run combine for datacard "+datacard)
 
-    cmd = "combine -M MultiDimFit datacards/%s.txt --algo grid --rMin %s --rMax %s --points 1000 > log.txt"%(datacard, str(scanRange[0]), str(scanRange[1]))
+    cmd = "combine -M MultiDimFit datacards/%s.txt --algo grid --rMin %s --rMax %s --points 1000 --X-rtd MINIMIZER_analytic > log.txt"%(datacard, str(scanRange[0]), str(scanRange[1]))
     os.system(cmd)
     cmd="mv higgsCombineTest.MultiDimFit.mH120.root combineOutputs/%s.root"%output
     os.system(cmd)    

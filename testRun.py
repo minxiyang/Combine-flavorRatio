@@ -13,7 +13,7 @@ import os
 def main():
 
     cardNames=[]
-    scanRange=(0.7, 1.3)
+    scanRange=(0.3, 2.0)
     massCut=800
     print("test run with mass cutoff "+str(massCut))
     for year in ["2016", "2017", "2018"]:
@@ -33,15 +33,17 @@ def main():
             writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
             runCB(scanRange, fileName, cardName)
             inputs={"result":fileName}
-            plotNll(year, cg, massCut, False, plotName, **inputs)
-            impactOut="Impact_"+year+"_"+cg+"_test"
-            plotImpact(cardName, impactOut)
+            #plotNll(year, cg, massCut, False, plotName, **inputs)
+            impactOut="Impact_"+year+"_"+cg
+            #plotImpact(cardName, impactOut)
+            #plotImpact(cardName, impactOut, False)
             
             
     runCB(scanRange, "allYearCombine", *cardNames)
     inputs={"result":"allYearCombine"}
-    plotNll("All year", "all category", massCut, False, "allYearCombine", **inputs)
-    plotImpact("combinedCard", "allYearCombine_test")
+    #plotNll("All year", "all category", massCut, False, "allYearCombine", **inputs)
+    #plotImpact("combinedCard", "allYearCombine")
+    #plotImpact("combinedCard", "allYearCombine", False)
         
 
 if __name__=="__main__":
