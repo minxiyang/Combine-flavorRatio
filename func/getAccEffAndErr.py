@@ -1,7 +1,7 @@
 import ROOT
 import numpy as np
 
-def getAccEffAndErr(year, cg, massCut):
+def getAccEffAndErr(year, cg, massCut, massCutH=0):
 
     dyHist2D={}
     f_mu=ROOT.TFile.Open("MC/"+"DY_mu_"+year+".root","r")
@@ -14,9 +14,15 @@ def getAccEffAndErr(year, cg, massCut):
     f_el.Close()
 
     nBins=int(massCut/10.)
-
-    dy_mu=dyHist2D["mu"].ProjectionX("mu", nBins+1, -1)
-    dy_el=dyHist2D["el"].ProjectionX("el", nBins+1, -1)
+    if massCutH<=massCut:
+        dy_mu=dyHist2D["mu"].ProjectionX("mu", nBins+1, -1)
+        dy_el=dyHist2D["el"].ProjectionX("el", nBins+1, -1)
+    else:
+        nBinsL=nBins
+        nBinsH=int(massCutH/10.)
+        dy_mu=dyHist2D["mu"].ProjectionX("mu", nBinsL+1, nBinsH)
+        dy_el=dyHist2D["el"].ProjectionX("el", nBinsL+1, nBinsH)
+     
     err_mu=ROOT.Double(0)
     n_mu=dy_mu.IntegralAndError(0, -1, err_mu)
     err_el=ROOT.Double(0)
