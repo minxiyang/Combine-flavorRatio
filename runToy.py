@@ -11,9 +11,9 @@ import os
 def main():
 
     cardNames=[]
-    massCut=800
-    scanRange=(0.3,2.5)
-    frs=[0.5, 0.8, 1.0, 1.25, 2.]
+    massCut=400
+    scanRange=(0.2,3)
+    frs=[0.67, 0.8, 1.0, 1.5]
     print("run with the different inject flavor ratio and mass cutoff "+str(massCut))
     for year in ["2016", "2017", "2018"]:
         for cg in ["bb","be"]:
@@ -23,8 +23,8 @@ def main():
                 plotName="nll"+year+cg+"_"+str(massCut)+"cut_"+"fr"+flavor
                 for fr in frs:
                     cardName="ch"+year+cg+"_"+str(massCut)+"cut_"+str(fr)+"fr"+flavor
-                    tmpName="tmp"+year+cg+"_"+str(massCut)+"cut_"+str(fr)+"fr"
-                    fileName="output"+year+cg+"_"+str(massCut)+"cut_"+str(fr)+"fr"
+                    tmpName="tmp"+year+cg+"_"+str(massCut)+"cut_"+str(fr)+"fr"+flavor
+                    fileName="output"+year+cg+"_"+str(massCut)+"cut_"+str(fr)+"fr"+flavor
                     cardNames.append(cardName)
                     tmps=tmpHandle(year, cg)
                     tmps.createTmps(massCut, sys_uncers, True, fr, flavor)

@@ -182,10 +182,13 @@ def preprocess():
                         #    if 'bb' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_bb"])
                         #    if 'be' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_be"])
                         if flavor == "mu":
+                         
                             hist_dict[pair[1]].Add(temphist, lumi*xsec/nev*(1-2*neg)*zFac)
                         elif 'bb' in pair[0]:
+                            #zFac[1]=1
                             hist_dict[pair[1]].Add(temphist, lumi*xsec/nev*(1-2*neg)*zFac[1])
                         else:
+                            
                             hist_dict[pair[1]].Add(temphist, lumi*xsec/nev*(1-2*neg)*zFac[2])
                     rootFile.Close()
                

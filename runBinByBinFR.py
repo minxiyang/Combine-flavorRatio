@@ -8,17 +8,18 @@ from plotting.plotTmps import plotTmps
 from plotting.plotImpact import plotImpact
 from Parameters import sys_uncers 
 import os
+from json import dumps
 
 
 
 def main():
     
-    bng=[400,500,690,900,1250,1610, 2000, 3500]
-    scanRange=(0.1, 3.0)
+    bng=[200, 300, 400,500,690,900,1250,1610, 2000, 3500]
+    scanRange=(0.3, 3.0)
     histdict={}
     histdictup={}
     histdictdown={}
-    for i in range(2):
+    for i in range(9):
         cardNames_bb=[]
         cardNames_be=[]
 
@@ -46,9 +47,9 @@ def main():
                 inputs={"result":fileName}
                 plotNll(year, cg, str(bng[i])+"to"+str(bng[1]), False, plotName, **inputs)
                 frs=getFrAndLimits(fileName)
-                histdict[key].append(frs[2])
-                histdictup[key].append(frs[3])
-                histdictdown[key].append(frs[1])
+                histdict[key].append(str(frs[2]))
+                histdictup[key].append(str(frs[3]))
+                histdictdown[key].append(str(frs[1]))
                 #impactOut="Impact_"+year+"_"+cg
                 #plotImpact(cardName, impactOut)
                 #plotImpact(cardName, impactOut, False)
@@ -60,26 +61,26 @@ def main():
         frs=getFrAndLimits("allYearCombinebb_bin"+str(bng[i])+"to"+str(bng[i+1]))
         key="allYearCombinebb"
         if key in histdict.keys():
-            histdict[key].append(frs[2])
-            histdictdown[key].append(frs[1])
-            histdictup[key].append(frs[3])
+            histdict[key].append(str(frs[2]))
+            histdictdown[key].append(str(frs[1]))
+            histdictup[key].append(str(frs[3]))
         else:
-            histdict[key]=[frs[2]]
-            histdictdown[key]=[frs[1]]
-            histdictup[key]=[frs[3]]
+            histdict[key]=[str(frs[2])]
+            histdictdown[key]=[str(frs[1])]
+            histdictup[key]=[str(frs[3])]
         runCB(scanRange, "allYearCombinebe_bin"+str(bng[i])+"to"+str(bng[i+1]), *cardNames_be)
         inputs={"result":"allYearCombinebe_bin"+str(bng[i])+"to"+str(bng[i+1])}
         plotNll("All year", "be", str(bng[i])+"to"+str(bng[i+1]), False, "allYearCombinebe_bin"+str(bng[i])+"to"+str(bng[i+1]), **inputs)
         frs=getFrAndLimits("allYearCombinebe_bin"+str(bng[i])+"to"+str(bng[i+1]))
         key="allYearCombinebe"
         if key in histdict.keys():
-            histdict[key].append(frs[2])
-            histdictdown[key].append(frs[1])
-            histdictup[key].append(frs[3])
+            histdict[key].append(str(frs[2]))
+            histdictdown[key].append(str(frs[1]))
+            histdictup[key].append(str(frs[3]))
         else:
-            histdict[key]=[frs[2]]
-            histdictdown[key]=[frs[1]]
-            histdictup[key]=[frs[3]]
+            histdict[key]=[str(frs[2])]
+            histdictdown[key]=[str(frs[1])]
+            histdictup[key]=[str(frs[3])]
 
         cardNames=cardNames_bb+cardNames_be
         runCB(scanRange, "allYearCombine_bin"+str(bng[i])+"to"+str(bng[i+1]), *cardNames)
@@ -88,18 +89,23 @@ def main():
         frs=getFrAndLimits("allYearCombine_bin"+str(bng[i])+"to"+str(bng[i+1]))
         key="allYearCombine"
         if key in histdict.keys():
-            histdict[key].append(frs[2])
-            histdictdown[key].append(frs[1])
-            histdictup[key].append(frs[3])
+            histdict[key].append(str(frs[2]))
+            histdictdown[key].append(str(frs[1]))
+            histdictup[key].append(str(frs[3]))
         else:
-            histdict[key]=[frs[2]]
-            histdictdown[key]=[frs[1]]
-            histdictup[key]=[frs[3]]
+            histdict[key]=[str(frs[2])]
+            histdictdown[key]=[str(frs[1])]
+            histdictup[key]=[str(frs[3])]
         #plotImpact("combinedCard", "allYearCombine_cut"+str(massCut))
         #plotImpact("combinedCard", "allYearCombine_cut"+str(massCut), False)
     print(histdictdown)
     print(histdict) 
-    print(histdictup)       
+    print(histdictup)
+    with open("txtResults/BinbyBinFR.txt", "a") as txt:
+        txt.write(dumps(histdictdown))
+        txt.write(dumps(histdict))
+        txt.write(dumps(histdictup))
+               
 
 if __name__=="__main__":
     main()

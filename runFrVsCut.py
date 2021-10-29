@@ -11,8 +11,8 @@ from plotting.plotFrVsCut import plotFrVsCut
 
 def main():
 
-    scanRange=(0.1, 2.1)
-    massCuts=range(400, 1101, 200)
+    scanRange=(0.1, 4.1)
+    massCuts=range(400, 1201, 50)
     #massCuts=[1250]
     frsLeft2={}
     frsLeft1={}

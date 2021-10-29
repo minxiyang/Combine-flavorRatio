@@ -18,7 +18,7 @@ class tmpHandle(object):
         
         for flavor in ['mu', 'el']:
         
-            bng=getBngs(flavor, self.year, self.cg, 200)
+            bng=getBngs(flavor, self.year, self.cg, 150)
             dy_file='DY_'+flavor+'_'+self.year+'.root'
 
             if flavor=='el':histName_dy='DielectronResponse_'+self.cg
@@ -81,7 +81,7 @@ class tmpHandle(object):
                 else:
                     dy_sig=dyHist2D.ProjectionX("sigx", nBinsL+1, nBinsH)
                     templates[flavor+'_DY_S']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S', bng)
-                    dy_bkgL=dyHist2D.ProjectionX("bkgxl", 20, nBinsL)
+                    dy_bkgL=dyHist2D.ProjectionX("bkgxl", 15, nBinsL)
                     templates[flavor+'_DY_BL']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL', bng)
                     dy_bkgH=dyHist2D.ProjectionX("bkgxh", nBinsH+1, -1)
                     templates[flavor+'_DY_BH']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH', bng)
@@ -100,7 +100,7 @@ class tmpHandle(object):
 
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew, bng)
-                            dy_bkgL=dyHist2D.ProjectionX("bkgxl", 20, nBinsL)
+                            dy_bkgL=dyHist2D.ProjectionX("bkgxl", 15, nBinsL)
                             templates[flavor+'_DY_BL_'+keynew]=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew, bng)
                             dy_bkgH=dyHist2D.ProjectionX("bkgxh", nBinsH+1, -1)
                             templates[flavor+'_DY_BH_'+keynew]=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew, bng)
@@ -110,7 +110,7 @@ class tmpHandle(object):
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Up', bng)
                             templates[flavor+'_DY_S_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Down', bng)
-                            dy_bkgL=dyHist2D.ProjectionX("bkgx", 20, nBinsL)
+                            dy_bkgL=dyHist2D.ProjectionX("bkgx", 15, nBinsL)
                             templates[flavor+'_DY_BL_'+keynew+'Up']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew+'Up', bng)
                             templates[flavor+'_DY_BL_'+keynew+'Down']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew+'Down', bng)
                             dy_bkgH=dyHist2D.ProjectionX("bkgx", nBinsH+1, -1)
@@ -121,7 +121,7 @@ class tmpHandle(object):
             if not isSingleBin:
                 dy_sig=dyHist2D.ProjectionX("sigx", nBins+1, -1)
                 templates[flavor+'_DY_S']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S', bng)
-                dy_bkg=dyHist2D.ProjectionX("bkgx", 20, nBins)
+                dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
                 templates[flavor+'_DY_B']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B', bng)
 
 
@@ -139,7 +139,7 @@ class tmpHandle(object):
              
                         dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBins+1, -1)
                         templates[flavor+'_DY_S_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew, bng)
-                        dy_bkg=dyHist2D.ProjectionX("bkgx", 20, nBins)
+                        dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
                         templates[flavor+'_DY_B_'+keynew]=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew, bng)
 
                     else:
@@ -147,7 +147,7 @@ class tmpHandle(object):
                         dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBins+1, -1)
                         templates[flavor+'_DY_S_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Up', bng)
                         templates[flavor+'_DY_S_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Down', bng)
-                        dy_bkg=dyHist2D.ProjectionX("bkgx", 20, nBins)
+                        dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
                         templates[flavor+'_DY_B_'+keynew+'Up']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew+'Up', bng)
                         templates[flavor+'_DY_B_'+keynew+'Down']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew+'Down', bng)
 
