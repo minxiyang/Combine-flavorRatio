@@ -31,7 +31,7 @@ def main():
                     tmps.saveTmps(tmpName)
                     writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
                     runCB(scanRange, fileName, cardName)
-                    key="fr is "+str(fr)
+                    key="Inject is "+str(fr)
                     inputs[key]=fileName
                 plotNll(year, cg, massCut, True, plotName, **inputs)
     
@@ -42,7 +42,7 @@ def main():
      
             fileName="allYearCombine_"+str(fr)+"fr"+flavor
             runCB(scanRange, fileName, *cardNamesfr)
-            key="fr is "+str(fr)
+            key="Inject is "+str(fr)
             inputs[key]=fileName
 
         plotNll("All year", "all category", massCut, True, "allYearCombineToy"+flavor, **inputs)

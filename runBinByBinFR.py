@@ -14,12 +14,13 @@ from json import dumps
 
 def main():
     
-    bng=[200, 300, 400,500,690,900,1250,1610, 2000, 3500]
-    scanRange=(0.3, 3.0)
+    #bng=[200, 300, 400,500,690,900,1250,1610, 2000, 3500]
+    bng=[1610, 2000, 3500]
+    scanRange=(0.05, 4.0)
     histdict={}
     histdictup={}
     histdictdown={}
-    for i in range(9):
+    for i in range(2):
         cardNames_bb=[]
         cardNames_be=[]
 
