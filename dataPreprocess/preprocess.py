@@ -75,7 +75,7 @@ def hist2Load(process, flavor, year):
 
 def fineBinJet(hFine ,hJet):
     j=0
-    for i in range(hFine.GetNbinsX()):
+    for i in range(3500):
         #for j in range(hJet.GetNbinsX()):    
         cent=hFine.GetBinCenter(i)
         if cent>=hJet.GetBinLowEdge(j) and cent<hJet.GetBinLowEdge(j+1): 
@@ -147,6 +147,8 @@ def preprocess():
                     if "Response" in pair[0]: hist_dict[pair[1]]=ROOT.TH2D(pair[1],pair[1],3500, 0., 3500., 350, 0., 3500.)
                     else: hist_dict[pair[1]]=ROOT.TH1D(pair[1], pair[1], 20000 ,0. ,20000.) 
                     if process == "Other":
+                            print(hist_dict["Jets_"+year+"_"+flavor+"_bb"].Integral(1800,3500))
+                            print(hist_dict["Jets_"+year+"_"+flavor+"_be"].Integral(1800,3500))
                             if 'bb' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_bb"])
                             if 'be' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_be"])
 
@@ -166,14 +168,16 @@ def preprocess():
                     
                     if key in crossSections.keys(): xsec=crossSections[key] 
                     else: continue
-                    #print(file_)
+                    print(file_)
+          
                     rootFile=ROOT.TFile.Open("crabOutputs/"+process+"/"+file_+".root")
                     neg=rootFile.FindObjectAny("weights").GetBinContent(1)/(rootFile.FindObjectAny("weights").GetBinContent(1)+rootFile.FindObjectAny("weights").GetBinContent(2)) 
                     nev=rootFile.FindObjectAny("Events").GetBinContent(1)
                     for pair in hist_pairs:
-                        #print(pair)
+                        
                         temphist=rootFile.Get(pair[0])
                         temphist.SetDirectory(0)
+                        #print(temphist.Integral(1800, -1)*lumi*xsec/nev*(1-2*neg)*zFac)
                         #if process == "Other":
                         #    if 'bb' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_bb"])
                         #    if 'be' in pair[0]:  hist_dict[pair[1]].Add(hist_dict["Jets_"+year+"_"+flavor+"_be"])
