@@ -1,10 +1,12 @@
 from Parameters import eff_corr
 
-def writeDatacards(cardName, fileName, year, cg, templates, acc_eff):
+def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=False):
 
     print('write datacard for %s %s'%(year, cg))
     if "el_DY_BL" in templates.keys():
         tmpcard=open("datacards/tmp/card_tmp_singleBin.txt", "r")
+    elif isFold:
+        tmpcard=open("datacards/tmp/card_fold.txt", "r")
     else:
         tmpcard=open("datacards/tmp/card_tmp.txt", "r") 
     tmptxt=tmpcard.read()
@@ -27,7 +29,7 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff):
         nev_mu_dy_bh=templates['mu_DY_BH'].Integral()
         tmptxt=tmptxt.replace('nev_mu_dy_bh',str(nev_mu_dy_bh))
 
-    else:
+    elif not isFold:
         nev_el_dy_b=templates['el_DY_B'].Integral()
         tmptxt=tmptxt.replace('nev_el_dy_b',str(nev_el_dy_b))
         nev_mu_dy_b=templates['mu_DY_B'].Integral()

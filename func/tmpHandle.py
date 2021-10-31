@@ -1,7 +1,7 @@
 import ROOT
 from Parameters import data_files, shape_corr
 from func.getBngs import getBngs
-
+import numpy as np
 
 
 class tmpHandle(object):
@@ -11,16 +11,24 @@ class tmpHandle(object):
          self.year=year
          self.cg=cg
     
-    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1., chan="mu", isSingleBin=False, massCutH=0):
+    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1., chan="mu", isSingleBin=False, massCutH=0, isFold=False):
 
         print("create templates for %s %s"%(self.year, self.cg) )
         templates={}
         
         for flavor in ['mu', 'el']:
-        
+             
             bng=getBngs(flavor, self.year, self.cg, 150)
+            if isFold: 
+                if massCutH<3500:bins=[1, massCut, massCutH, 3500]
+                else: bins=[1, massCut, 3500]
+                bng=np.asarray(bins,dtype=np.float64)
+                massCut1=massCut
+                massCutH1=massCutH
+                massCut=150
+                massCutH=3500
             dy_file='DY_'+flavor+'_'+self.year+'.root'
-
+            print(bng)
             if flavor=='el':histName_dy='DielectronResponse_'+self.cg
             else: histName_dy="DimuonResponse_"+self.cg
 
@@ -187,8 +195,32 @@ class tmpHandle(object):
                 dataHist.Add(templates[flavor+'_Other'])
                 if flavor==chan: dataHist.Add(templates[flavor+'_DY_S'], fr)
                 else: dataHist.Add(templates[flavor+'_DY_S'])
-
+        
             templates[flavor+'_data_obs']=dataHist.Clone()
+            if isFold:
+                for key in templates.keys():
+                    if flavor not in key: continue
+                    for i in range(len(bng+1)):
+                        if i!= 2: 
+                            templates[key].SetBinContent(i,0)
+                            templates[key].SetBinError(i,0)
+                    if "DY_B" in key: 
+                        templates.pop(key)
+                    else:
+                        name=templates[key].GetName()                     
+                        tempHist=ROOT.TH1D("temp", "", 1, templates[key].GetBinLowEdge(2), templates[key].GetBinLowEdge(3))
+                        print(templates[key].GetBinLowEdge(2))
+                        print(templates[key].GetBinLowEdge(3))
+                        tempHist.SetBinContent(1, templates[key].GetBinContent(2))
+                        print(tempHist.GetBinContent(1))
+                        print(key)
+                        templates.pop(key)
+                        tempHist.SetName(name)
+                        templates[key]=tempHist.Clone()
+                        templates[key].SetBinContent(0,0)
+                        templates[key].SetBinContent(-1,0)
+            massCut=massCut1
+            massCutH=massCutH1
         self.templates=templates
 
     def saveTmps(self, tmpName):
@@ -209,6 +241,9 @@ class tmpHandle(object):
         for key in self.templates.keys():
             if 'mu_DY_S' in key: self.templates[key].Scale(nev_mu_dy_s)
             elif 'el_DY_S' in key: self.templates[key].Scale(nev_el_dy_s)
+
+    
+
     def loadTmps(self, tmpName, sys_uncers, isSingleBin=False):
 
         print('load templates '+tmpName)

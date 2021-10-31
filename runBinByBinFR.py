@@ -14,13 +14,13 @@ from json import dumps
 
 def main():
     
-    #bng=[200, 300, 400,500,690,900,1250,1610, 2000, 3500]
-    bng=[1610, 2000, 3500]
-    scanRange=(0.05, 4.0)
+    bng=[200, 300, 400,500,690,900,1250,1610, 2000, 3500]
+    #bng=[1610, 2000, 3500]
+    scanRange=(0.1, 4.1)
     histdict={}
     histdictup={}
     histdictdown={}
-    for i in range(2):
+    for i in range(9):
         cardNames_bb=[]
         cardNames_be=[]
 
@@ -39,11 +39,11 @@ def main():
                 else: cardNames_be.append(cardName)
                 acc_eff = getAccEffAndErr(year, cg, bng[i], bng[i+1])
                 tmps=tmpHandle(year, cg)
-                tmps.createTmps(bng[i], sys_uncers, isSingleBin=True, massCutH=bng[i+1])
+                tmps.createTmps(bng[i], sys_uncers, isFold=True, massCutH=bng[i+1])
              
                 tmps.saveTmps(tmpName)
                 #plotTmps(year, cg, massCut, tmps.templates)
-                writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
+                writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff, isFold=True)
                 runCB(scanRange, fileName, cardName)
                 inputs={"result":fileName}
                 plotNll(year, cg, str(bng[i])+"to"+str(bng[1]), False, plotName, **inputs)
@@ -102,7 +102,7 @@ def main():
     print(histdictdown)
     print(histdict) 
     print(histdictup)
-    with open("txtResults/BinbyBinFR.txt", "a") as txt:
+    with open("txtResults/BinbyBinFR_fold.txt", "a") as txt:
         txt.write(dumps(histdictdown))
         txt.write(dumps(histdict))
         txt.write(dumps(histdictup))
