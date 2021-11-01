@@ -28,7 +28,6 @@ class tmpHandle(object):
                 massCut=150
                 massCutH=3500
             dy_file='DY_'+flavor+'_'+self.year+'.root'
-            print(bng)
             if flavor=='el':histName_dy='DielectronResponse_'+self.cg
             else: histName_dy="DimuonResponse_"+self.cg
 
@@ -209,18 +208,14 @@ class tmpHandle(object):
                     else:
                         name=templates[key].GetName()                     
                         tempHist=ROOT.TH1D("temp", "", 1, templates[key].GetBinLowEdge(2), templates[key].GetBinLowEdge(3))
-                        print(templates[key].GetBinLowEdge(2))
-                        print(templates[key].GetBinLowEdge(3))
                         tempHist.SetBinContent(1, templates[key].GetBinContent(2))
-                        print(tempHist.GetBinContent(1))
-                        print(key)
                         templates.pop(key)
                         tempHist.SetName(name)
                         templates[key]=tempHist.Clone()
                         templates[key].SetBinContent(0,0)
                         templates[key].SetBinContent(-1,0)
-            massCut=massCut1
-            massCutH=massCutH1
+                massCut=massCut1
+                massCutH=massCutH1
         self.templates=templates
 
     def saveTmps(self, tmpName):

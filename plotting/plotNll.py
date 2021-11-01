@@ -31,7 +31,7 @@ def plotNll(year, cg, massCut, isLabel, output, **rootFiles):
              
             if nllCombine[i]>0: histDict[label].SetBinContent(i,nllCombine[i])
             else: histDict[label].SetBinContent(i,0)
-        histDict[label].GetYaxis().SetRangeUser(0.0,10.)
+        histDict[label].GetYaxis().SetRangeUser(0.0, 6.)
         histDict[label].SetDirectory(0)
         tree.SetDirectory(0)
         f1.Close()

@@ -12,7 +12,7 @@ def main():
 
     cardNames=[]
     massCut=400
-    scanRange=(0.2,3)
+    scanRange=(0.02,2.2)
     frs=[0.67, 0.8, 1.0, 1.5]
     print("run with the different inject flavor ratio and mass cutoff "+str(massCut))
     for year in ["2016", "2017", "2018"]:
