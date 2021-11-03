@@ -1,0 +1,38 @@
+imax 2 numbbr of bins
+jmax 5 numbbr of processes minus 1
+kmax * numbbr of nuisance parameters
+-----------------------------------------------------------------------------------------------------------------------------------------------
+shapes *                   control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root el_$PROCESS
+shapes el_DY_S             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_DY_B             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_Other            control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes *                   signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root mu_$PROCESS
+shapes mu_DY_S             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_DY_B             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_Other            signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018be_400cut_0.67frel.root $PROCESS       $PROCESS$SYSTEMATIC
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin          signal        control
+observation  141679.348967    89816.4309618   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin                               signal              signal              signal              control              control             control           
+process                           mu_DY_S             mu_DY_B             mu_Other            el_DY_S              el_DY_B             el_Other
+process                           0                   1                   2                   1                    2                   3  
+rate                              1.0                 102540.769916         32286.7072658            1.0                  57880.7455926         29959.8330642           
+-----------------------------------------------------------------------------------------------------------------------------------------------
+_2018be_elMassScale             shape     -                   -                  -                   1.0                  1.0                  1.0
+_muMassScale             shape     1.0                 1.0                1.0                 -                    -                    -
+_2018be_Smear                   shape     1.0                 1.0                1.0                 -                    -                    -
+_Prefire                 shape     -                   -                  -                   1.0                  1.0                  1.0
+_PUScale                 shape     -                   -                  -                   1.0                  1.0                  1.0
+_2018be_MuonID                  shape     1.0                 1.0                1.0                 -                    -                    -
+_trig2018be                    lnN       -                   1.01              1.01               -                    -                    -
+_eff                     lnN       1.08                -                  -                   1.08                 1.08                 1.08
+R2018be                       param     2.32348935529         0.01923207265660935
+-----------------------------------------------------------------------------------------------------------------------------------------------              
+R2018be                  rateParam     signal              mu_DY_S            2.32348935529
+Rmu2018be                 rateParam     signal              mu_DY_S            (@0) Rel2018be 
+Rel2018be                 rateParam     control             el_DY_S            2949.03329097
+----------------------------------------------------------------------------------------------------------------------------------------------          
+signal              autoMCStats 0 0 1
+control             autoMCStats 0 0 1
+   

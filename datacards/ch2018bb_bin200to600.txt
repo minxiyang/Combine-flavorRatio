@@ -1,0 +1,40 @@
+imax 2 numbbr of bins
+jmax 7 numbbr of processes minus 1
+kmax * numbbr of nuisance parameters
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+shapes *               control         /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root el_$PROCESS
+shapes el_DY_S         control         /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_DY_BH        control         /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_DY_BL        control         /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_Other        control         /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes *               signal          /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root mu_$PROCESS
+shapes mu_DY_S         signal          /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_DY_BH        signal          /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_DY_BL        signal          /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_Other        signal          /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2018bb_bin200to600.root $PROCESS       $PROCESS$SYSTEMATIC
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bin          signal        control
+observation  98237.0    91469.0   
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bin                                signal          signal          signal          signal          control          control          control          control           
+process                            mu_DY_S         mu_DY_BL        mu_DY_BH        mu_Other        el_DY_S          el_DY_BL         el_DY_BH         el_Other
+process                            0               1               2               3               1                2                3                4
+rate                               1.0             40995.8059491    901.486830976    25907.4029288        1.0              33294.8610296     923.876968058     31069.9124621           
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+_2018bb_elMassScale             shape     -               -               -               -               1.0              1.0              1.0              1.0
+_muMassScale             shape     1.0             1.0             1.0             1.0             -                -                -                -
+_Smear                   shape     1.0             1.0             1.0             1.0             -                -                -                -
+_Prefire                 shape     -               -               -               -               1.0              1.0              1.0              1.0
+_PUScale                 shape     -               -               -               -               1.0              1.0              1.0              1.0
+_MuonID                  shape     1.0             1.0             1.0             1.0             -                -                -                -
+_trig2018bb                    lnN       -               1.01           1.01           1.01           -                -                -                -
+_eff                     lnN       1.06            -               -               -               1.06             1.06             1.06             1.06
+R2018bb                       param     0.979423823462         0.009885077019005852
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+R2018bb                  rateParam     signal              mu_DY_S            0.979423823462
+Rmu2018bb                 rateParam     signal              mu_DY_S            (@0) Rel2018bb 
+Rel2018bb                 rateParam     control             el_DY_S            31914.9963165  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+signal              autoMCStats 0 0 1
+control             autoMCStats 0 0 1           
