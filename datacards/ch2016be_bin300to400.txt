@@ -1,0 +1,38 @@
+imax 2 numbbr of bins
+jmax 3 numbbr of processes minus 1
+kmax * numbbr of nuisance parameters
+-----------------------------------------------------------------------------------------------------------------------------------------------
+shapes *                   control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root el_$PROCESS
+shapes el_DY_S             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+#shapes el_DY_B             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_Other            control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes *                   signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root mu_$PROCESS
+shapes mu_DY_S             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+#shapes mu_DY_B             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_Other            signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp2016be_bin300to400.root $PROCESS       $PROCESS$SYSTEMATIC
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin          signal        control
+observation  8331.0    4682.0   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin                               signal             signal              control              control                  
+process                           mu_DY_S            mu_Other            el_DY_S              el_Other
+process                           0                     1                   1                    2  
+rate                              1.0                2765.9962295            1.0                  1912.91550181           
+-----------------------------------------------------------------------------------------------------------------------------------------------
+_2016be_elMassScale             shape     -                    -                   1.0                  1.0                 
+_2016bbbe_muMassScale             shape     1.0                  1.0                 -                    -                  
+_2016be_Smear                   shape     1.0                  1.0                 -                    -                    
+_Prefire                 shape     -                    -                   1.0                  1.0               
+_PUScale                 shape     -                    -                   1.0                  1.0               
+_2016be_MuonID                  shape     1.0                  1.0                 -                    -                   
+_trig2016be                    lnN       -                    1.007               -                    -                   
+_eff                     lnN       1.08                 -                   1.08                 1.08               
+R2016be                       param     2.12903665508         0.04893622776710982
+-----------------------------------------------------------------------------------------------------------------------------------------------              
+R2016be                  rateParam     signal              mu_DY_S            2.12903665508
+Rmu2016be                 rateParam     signal              mu_DY_S            (@0) Rel2016be 
+Rel2016be                 rateParam     control             el_DY_S            2640.1854829
+----------------------------------------------------------------------------------------------------------------------------------------------        
+signal              autoMCStats 0 0 1
+control             autoMCStats 0 0 1
+     
