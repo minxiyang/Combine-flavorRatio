@@ -1,0 +1,14 @@
+## Automatically generated. Simple C&C datacard model.
+## Original author: Andrea Carlo Marini
+ ##Adapted for Flavor ratio by Arnab* imax
+* jmax
+* kmax
+----------------
+bin Reco_1 Reco_2 Reco_3 Reco_4 Reco_5 Reco_6 Reco_7 Reco_8 Reco_9 
+observation 0 0 0 0 0 0 0 0 0 
+----------------
+bin Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_1 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_2 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_3 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_4 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_5 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_6 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_7 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_8 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 Reco_9 
+process gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg gen_bin1 gen_bin2 gen_bin3 gen_bin4 gen_bin5 gen_bin6 gen_bin7 gen_bin8 gen_bin9 Bkg 
+process -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 -1 -2 -3 -4 -5 -6 -7 -8 -9 1 
+rate 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+----------------

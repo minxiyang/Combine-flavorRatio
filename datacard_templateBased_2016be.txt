@@ -1,0 +1,41 @@
+## Automatically generated. Simple C&C datacard model.
+## Original author: Andrea Carlo Marini
+##Adapted for Flavor ratio by Arnab 
+* imax
+* jmax
+* kmax
+----------------
+shapes * control templates/tmp2016be_multiBins.root el_$PROCESS
+shapes el_DY_S0 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S1 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S2 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S3 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S4 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S5 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S6 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S7 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S8 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S9 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S10 control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_Other control templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC
+shapes * signal templates/tmp2016be_multiBins.root mu_$PROCESS 
+shapes mu_DY_S0 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S1 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S2 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S3 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S4 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S5 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S6 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S7 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S8 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S9 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_DY_S10 signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+shapes mu_Other signal templates/tmp2016be_multiBins.root $PROCESS $PROCESS$SYSTEMATIC 
+bin signal control 
+observation 82218 47563 
+----------------
+bin signal signal signal signal signal signal signal signal signal signal signal signal control control control control control control control control control control control control 
+process mu_DY_S0 mu_DY_S1 mu_DY_S2 mu_DY_S3 mu_DY_S4 mu_DY_S5 mu_DY_S6 mu_DY_S7 mu_DY_S8 mu_DY_S9 mu_DY_S10 mu_Other el_DY_S0 el_DY_S1 el_DY_S2 el_DY_S3 el_DY_S4 el_DY_S5 el_DY_S6 el_DY_S7 el_DY_S8 el_DY_S9 el_DY_S10 el_Other 
+process 1 0 -1 -2 -3 -4 -5 -6 -7 -8 -9 3 1 2 3 4 5 6 7 8 9 10 11 12 
+rate 32563.33 23945.61 5888.91 2068.53 1211.07 350.80 133.25 27.04 7.03 2.66 0.01 18242.72 15392.77 11501.07 2763.47 899.53 536.86 152.29 57.61 11.62 2.80 0.98 0.00 15108.45 
+----------------
