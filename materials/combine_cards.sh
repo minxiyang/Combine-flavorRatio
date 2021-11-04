@@ -1,0 +1,1 @@
+combineCards.py datacard_templateBased_2016bb.txt datacard_templateBased_2016be.txt > combined_datacard2016.txt
