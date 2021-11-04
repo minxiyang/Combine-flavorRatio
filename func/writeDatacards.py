@@ -15,6 +15,8 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     tmptxt=tmptxt.replace('nev_mu_obs',str(nev_mu_obs))
     nev_el_obs=templates['el_data_obs'].Integral()
     tmptxt=tmptxt.replace('nev_el_obs',str(nev_el_obs))
+    if nev_el_obs==0: print("yield of dielectron for %s %s is 0"%(cg, year))
+    if nev_mu_obs==0: print("yield of dimuon for %s %s is 0"%(cg, year))
     nev_el_dy_s=templates['el_DY_S'].Integral()
     tmptxt=tmptxt.replace('nev_el_dy_s',str(nev_el_dy_s))
     nev_mu_dy_s=templates['mu_DY_S'].Integral()

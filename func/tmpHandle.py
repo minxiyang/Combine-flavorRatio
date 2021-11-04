@@ -11,7 +11,7 @@ class tmpHandle(object):
          self.year=year
          self.cg=cg
     
-    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1., chan="mu", isSingleBin=False, massCutH=0, isFold=False):
+    def createTmps(self, massCut, sys_uncers, istoy=False, fr=1., chan="mu", isSingleBin=False, massCutH=0, isFold=False, isMultiBin=False):
 
         print("create templates for %s %s"%(self.year, self.cg) )
         templates={}
@@ -124,8 +124,36 @@ class tmpHandle(object):
                             templates[flavor+'_DY_BH_'+keynew+'Up']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew+'Up', bng)
                             templates[flavor+'_DY_BH_'+keynew+'Down']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew+'Down', bng)
                     
+            elif isMultiBin:
+                genBng=[0]+massCutH+[-10]
+                for i in range(len(genBng)-1):
+                    nBinsH=int(genBng[i+1]/10.)
+                    nBinsL=int(genBng[i]/10.)
 
-            if not isSingleBin:
+                    dy_sig=dyHist2D.ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
+                    templates[flavor+'_DY_bin'+str(i)]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i), bng)
+
+                    for key in dyHist2Dvar.keys():
+
+                        keynew=key
+                        if "MassScale" in key: keynew=flavor+key
+                        for corr in shape_corr:
+                            key1=keynew.strip('Up')
+                            key2=key1.strip('Down')
+
+                            if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
+
+                        if 'Up' in key or 'Down' in key:
+
+                            dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
+                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew, bng)
+                        else:
+                            dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
+                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Up', bng)
+                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Down', bng)
+
+
+            else:
                 dy_sig=dyHist2D.ProjectionX("sigx", nBins+1, -1)
                 templates[flavor+'_DY_S']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S', bng)
                 dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
@@ -221,21 +249,25 @@ class tmpHandle(object):
     def saveTmps(self, tmpName):
 
         print('save templates for %s %s'%(self.year, self.cg))
+        if "mu_DY_bin0" in self.templates.keys():
+            tempFiles=ROOT.TFile.Open("templates/"+tmpName+".root","RECREATE")
+            for key in self.templates.keys(): self.templates[key].Write()
+            tempFiles.Save()
+            tempFiles.Close()
+        else:
+            nev_el_dy_s=self.templates['el_DY_S'].Integral()
+            nev_mu_dy_s=self.templates['mu_DY_S'].Integral()
+            for key in self.templates.keys():
+                if 'mu_DY_S' in key: self.templates[key].Scale(1.0/nev_mu_dy_s)
+                elif 'el_DY_S' in key: self.templates[key].Scale(1.0/nev_el_dy_s)
 
-        nev_el_dy_s=self.templates['el_DY_S'].Integral()
-        nev_mu_dy_s=self.templates['mu_DY_S'].Integral()
-
-        for key in self.templates.keys():
-            if 'mu_DY_S' in key: self.templates[key].Scale(1.0/nev_mu_dy_s)
-            elif 'el_DY_S' in key: self.templates[key].Scale(1.0/nev_el_dy_s)
-
-        tempFiles=ROOT.TFile.Open("templates/"+tmpName+".root","RECREATE")
-        for key in self.templates.keys(): self.templates[key].Write()
-        tempFiles.Save()
-        tempFiles.Close()
-        for key in self.templates.keys():
-            if 'mu_DY_S' in key: self.templates[key].Scale(nev_mu_dy_s)
-            elif 'el_DY_S' in key: self.templates[key].Scale(nev_el_dy_s)
+            tempFiles=ROOT.TFile.Open("templates/"+tmpName+".root","RECREATE")
+            for key in self.templates.keys(): self.templates[key].Write()
+            tempFiles.Save()
+            tempFiles.Close()
+            for key in self.templates.keys():
+                if 'mu_DY_S' in key: self.templates[key].Scale(nev_mu_dy_s)
+                elif 'el_DY_S' in key: self.templates[key].Scale(nev_el_dy_s)
 
     
 
