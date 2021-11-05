@@ -130,7 +130,8 @@ class tmpHandle(object):
                             templates[flavor+'_DY_BH_'+keynew+'Down']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew+'Down', bng)
                     
             elif isMultiBin:
-                genBng=[0]+massCutH+[-10]
+                genBng=[0]+massCutH[:-1]+[-10]
+                print(genBng)
                 for i in range(len(genBng)-1):
                     nBinsH=int(genBng[i+1]/10.)
                     nBinsL=int(genBng[i]/10.)
@@ -257,7 +258,7 @@ class tmpHandle(object):
         if "mu_DY_S0" in self.templates.keys():
             nev_el_dy_s=[]
             nev_mu_dy_s=[]
-            for i in range(1,11):
+            for i in range(1,10):
                 nev_el_dy_s.append(self.templates['el_DY_S'+str(i)].Integral())
                 nev_mu_dy_s.append(self.templates['mu_DY_S'+str(i)].Integral())
                 self.templates['el_DY_S'+str(i)].Scale(1.0/nev_el_dy_s[i-1])
@@ -270,7 +271,7 @@ class tmpHandle(object):
             for key in self.templates.keys():self.templates[key].Write()
             tempFiles.Save()
             tempFiles.Close()
-            for i in range(1,11):
+            for i in range(1,10):
                 self.templates['el_DY_S'+str(i)].Scale(nev_el_dy_s[i-1])
                 self.templates['mu_DY_S'+str(i)].Scale(nev_mu_dy_s[i-1])
                 for key in self.templates.keys():

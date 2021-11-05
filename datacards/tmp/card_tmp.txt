@@ -32,4 +32,7 @@ R1                       param     acc_eff_med         acc_eff_err
 R1                  rateParam     signal              mu_DY_S            acc_eff_med
 Rmu                 rateParam     signal              mu_DY_S            (@0) Rel 
 Rel                 rateParam     control             el_DY_S            nev_el_dy_s
-----------------------------------------------------------------------------------------------------------------------------------------------             
+----------------------------------------------------------------------------------------------------------------------------------------------          
+signal              autoMCStats 0 0 1
+control             autoMCStats 0 0 1
+   

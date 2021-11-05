@@ -4,7 +4,7 @@ import root_numpy
 import numpy as np
 from Parameters import lumi_el, lumi_mu
 from plotting.setTDRStyle import setTDRStyle
-def plotNll(year, cg, massCut, isLabel, output, **rootFiles):
+def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
 	
     ROOT.gStyle.SetOptStat(0)
     count=0
@@ -15,12 +15,14 @@ def plotNll(year, cg, massCut, isLabel, output, **rootFiles):
         f1=ROOT.TFile.Open("combineOutputs/"+rootFile+".root","r")
         tree=f1.Get("limit")
         nllCombine=root_numpy.tree2array(tree,"deltaNLL")
-        rCombine=root_numpy.tree2array(tree,"r_bin9") 
+        if i==0:rCombine=root_numpy.tree2array(tree,"r")
+        else: rCombine=root_numpy.tree2array(tree,"r_bin"+str(i))
+         
         Max=np.max(rCombine)
         
         Min=np.min(rCombine)
         
-        r=np.linspace(Min, Max,100)
+        r=np.linspace(Min, Max,1000)
         histDict[label]=ROOT.TH1D("hist"+str(count), year+" "+cg+" masscut "+str(massCut)+" GeV", len(r)-1, r)
         histDict[label].GetXaxis().SetTitle('flavor ratio')
         histDict[label].GetYaxis().SetTitle('-2#Delta lnL')
@@ -67,8 +69,8 @@ def plotNll(year, cg, massCut, isLabel, output, **rootFiles):
     latex.SetNDC(True)
     if year in lumi_mu.keys(): latex.DrawLatex(0.9, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
     else: latex.DrawLatex(0.9, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
-    print("plots/NLL/%s.pdf"%output)
+    print("plots/NLL/%s.pdf"%output+year+cg)
     c.RedrawAxis()
-    c.Print("plots/NLL/%s.pdf"%output)
+    c.Print("plots/NLL/%s.pdf"%output+year+cg)
 
 

@@ -13,7 +13,6 @@ shapes el_DY_S6  control /depot/cms/private/users/minxi/lepratio/LimitSetting/Zp
 shapes el_DY_S7  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes el_DY_S8  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes el_DY_S9  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S10 control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes el_Other  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes *         signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root mu_$PROCESS
 shapes mu_DY_S0  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
@@ -26,25 +25,24 @@ shapes mu_DY_S6  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/Zp
 shapes mu_DY_S7  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes mu_DY_S8  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes mu_DY_S9  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S10 signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 shapes mu_Other  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bin              signal         control
 observation      nev_mu_obs     nev_el_obs
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bin                        signal      signal      signal      signal      signal      signal      signal      signal      signal      signal      signal      signal     control     control     control     control     control     control     control     control     control     control     control     control
-process                    mu_DY_S0    mu_DY_S1    mu_DY_S2    mu_DY_S3    mu_DY_S4    mu_DY_S5    mu_DY_S6    mu_DY_S7    mu_DY_S8    mu_DY_S9    mu_DY_S10   mu_Other   el_DY_S0    el_DY_S1    el_DY_S2    el_DY_S3    el_DY_S4    el_DY_S5    el_DY_S6    el_DY_S7    el_DY_S8    el_DY_S9    el_DY_S10   el_Other
-process                    1           0           -1          -2          -3          -4          -5          -6          -7          -8          -9          3          1           2           3           4           5           6           7           8           9           10          11          12
-rate                       nev_mu_dy0  1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         nev_mu_o   nev_el_dy0  1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         nev_el_o
+bin                        signal      signal      signal      signal      signal      signal      signal      signal      signal      signal      signal     control     control     control     control     control     control     control     control     control     control      control
+process                    mu_DY_S0    mu_DY_S1    mu_DY_S2    mu_DY_S3    mu_DY_S4    mu_DY_S5    mu_DY_S6    mu_DY_S7    mu_DY_S8    mu_DY_S9    mu_Other   el_DY_S0    el_DY_S1    el_DY_S2    el_DY_S3    el_DY_S4    el_DY_S5    el_DY_S6    el_DY_S7    el_DY_S8    el_DY_S9     el_Other
+process                    1           0           -1          -2          -3          -4          -5          -6          -7          -8          3          1           2           3           4           5           6           7           8           9           10           12
+rate                       nev_mu_dy0  1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         nev_mu_o   nev_el_dy0  1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          nev_el_o
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-_elMassScale   shape       -           -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0
-_muMassScale   shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -           -           -
-_Smear         shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -           -           -
-_Prefire       shape       -           -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0
-_PUScale       shape       -           -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0
-_MuonID        shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -           -           -
-_trig          lnN         Trigv       -           -           -           -           -           -           -           -           -           -           Trigv      -           -           -           -           -           -           -           -           -           -           -           -
-_eff           lnN         -           Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv       Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv
+_elMassScale   shape       -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          1.0
+_muMassScale   shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -            -
+_Smear         shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -            -
+_Prefire       shape       -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          1.0
+_PUScale       shape       -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          1.0
+_MuonID        shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -            -
+_trig          lnN         Trigv       -           -           -           -           -           -           -           -           -           Trigv      -           -           -           -           -           -           -           -           -           -            -
+_eff           lnN         -           Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv       Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv         Effv
 R1             param      acc_eff_med1             acc_eff_err1 
 R2             param      acc_eff_med2             acc_eff_err2 
 R3             param      acc_eff_med3             acc_eff_err3 
@@ -54,7 +52,7 @@ R6             param      acc_eff_med6             acc_eff_err6
 R7             param      acc_eff_med7             acc_eff_err7 
 R8             param      acc_eff_med8             acc_eff_err8 
 R9             param      acc_eff_med9             acc_eff_err9 
-R10            param      acc_eff_med10            acc_eff_err10 
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 R1             rateParam  signal                   mu_DY_S1     acc_eff_med1   [0,2] 
 R2             rateParam  signal                   mu_DY_S2     acc_eff_med2   [0,2]
@@ -65,7 +63,6 @@ R6             rateParam  signal                   mu_DY_S6     acc_eff_med6   [
 R7             rateParam  signal                   mu_DY_S7     acc_eff_med7   [0,2]
 R8             rateParam  signal                   mu_DY_S8     acc_eff_med8   [0,2]
 R9             rateParam  signal                   mu_DY_S9     acc_eff_med9   [0,2]
-R10            rateParam  signal                   mu_DY_S10    acc_eff_med10  [0,2]
 Rmu1           rateParam  signal                   mu_DY_S1     (@0) Rel1       
 Rel1           rateParam  control                  el_DY_S1     nev_el_dy1      [0,999999]
 Rmu2           rateParam  signal                   mu_DY_S2     (@0) Rel2       
@@ -84,14 +81,12 @@ Rmu8           rateParam  signal                   mu_DY_S8     (@0) Rel8
 Rel8           rateParam  control                  el_DY_S8     nev_el_dy8      [0,999999]
 Rmu9           rateParam  signal                   mu_DY_S9     (@0) Rel9 
 Rel9           rateParam  control                  el_DY_S9     nev_el_dy9      [0,999999]
-Rmu10          rateParam  signal                   mu_DY_S10    (@0) Rel10 
-Rel10          rateParam  control                  el_DY_S10    nev_el_dy10     [0,999999]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 signal              autoMCStats 0 0 1
 control             autoMCStats 0 0 1
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-massBin9 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7 Rel8 Rel10 
-massBin8 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7 Rel10 
+massBin9 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7 Rel8  
+massBin8 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7  
 
 
 
