@@ -2,12 +2,13 @@ import ROOT
 import root_numpy
 import numpy as np
 
-def getFrAndLimits(rootFile):
+def getFrAndLimits(rootFile, i=0):
 
     f=ROOT.TFile.Open("combineOutputs/"+rootFile+".root","r")
     tree=f.Get("limit")
     nll=root_numpy.tree2array(tree,"deltaNLL")
-    r=root_numpy.tree2array(tree,"r")
+    if i!=0:r=root_numpy.tree2array(tree,"r_bin"+str(i))
+    else:r=root_numpy.tree2array(tree,"r")
    
     idx=np.argmin(nll)
     r_min=r[idx]

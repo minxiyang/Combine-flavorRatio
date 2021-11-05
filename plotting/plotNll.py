@@ -15,12 +15,12 @@ def plotNll(year, cg, massCut, isLabel, output, **rootFiles):
         f1=ROOT.TFile.Open("combineOutputs/"+rootFile+".root","r")
         tree=f1.Get("limit")
         nllCombine=root_numpy.tree2array(tree,"deltaNLL")
-        rCombine=root_numpy.tree2array(tree,"r") 
+        rCombine=root_numpy.tree2array(tree,"r_bin9") 
         Max=np.max(rCombine)
         
         Min=np.min(rCombine)
         
-        r=np.linspace(Min, Max,1000)
+        r=np.linspace(Min, Max,100)
         histDict[label]=ROOT.TH1D("hist"+str(count), year+" "+cg+" masscut "+str(massCut)+" GeV", len(r)-1, r)
         histDict[label].GetXaxis().SetTitle('flavor ratio')
         histDict[label].GetYaxis().SetTitle('-2#Delta lnL')

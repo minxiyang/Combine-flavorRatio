@@ -19,10 +19,15 @@ class tmpHandle(object):
         for flavor in ['mu', 'el']:
              
             bng=getBngs(flavor, self.year, self.cg, 150)
+            #bng=np.append(bng[:-1],[2000,2500,3000,3500])
+            bins=[200,300,400,500,690,900,1250,1610,2000,3500]
+            bng=np.asarray(bins,dtype=np.float64)
+            print(bng)
             if isFold: 
                 if massCutH<3500:bins=[1, massCut, massCutH, 3500]
                 else: bins=[1, massCut, 3500]
                 bng=np.asarray(bins,dtype=np.float64)
+                #bng=np.append(bng,[,2000, 3500])
                 massCut1=massCut
                 massCutH1=massCutH
                 massCut=150
@@ -131,7 +136,7 @@ class tmpHandle(object):
                     nBinsL=int(genBng[i]/10.)
 
                     dy_sig=dyHist2D.ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
-                    templates[flavor+'_DY_bin'+str(i)]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i), bng)
+                    templates[flavor+'_DY_S'+str(i)]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i), bng)
 
                     for key in dyHist2Dvar.keys():
 
@@ -146,11 +151,11 @@ class tmpHandle(object):
                         if 'Up' in key or 'Down' in key:
 
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
-                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew, bng)
+                            templates[flavor+'_DY_S'+str(i)+'_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew, bng)
                         else:
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
-                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Up', bng)
-                            templates[flavor+'_DY_bin'+str(i)+'_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Down', bng)
+                            templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Up', bng)
+                            templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Down', bng)
 
 
             else:
@@ -249,11 +254,29 @@ class tmpHandle(object):
     def saveTmps(self, tmpName):
 
         print('save templates for %s %s'%(self.year, self.cg))
-        if "mu_DY_bin0" in self.templates.keys():
+        if "mu_DY_S0" in self.templates.keys():
+            nev_el_dy_s=[]
+            nev_mu_dy_s=[]
+            for i in range(1,11):
+                nev_el_dy_s.append(self.templates['el_DY_S'+str(i)].Integral())
+                nev_mu_dy_s.append(self.templates['mu_DY_S'+str(i)].Integral())
+                self.templates['el_DY_S'+str(i)].Scale(1.0/nev_el_dy_s[i-1])
+                self.templates['mu_DY_S'+str(i)].Scale(1.0/nev_mu_dy_s[i-1])
+                for key in self.templates.keys():
+                    if 'el_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_el_dy_s[i-1])
+                    elif 'mu_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_mu_dy_s[i-1])
+            
             tempFiles=ROOT.TFile.Open("templates/"+tmpName+".root","RECREATE")
-            for key in self.templates.keys(): self.templates[key].Write()
+            for key in self.templates.keys():self.templates[key].Write()
             tempFiles.Save()
             tempFiles.Close()
+            for i in range(1,11):
+                self.templates['el_DY_S'+str(i)].Scale(nev_el_dy_s[i-1])
+                self.templates['mu_DY_S'+str(i)].Scale(nev_mu_dy_s[i-1])
+                for key in self.templates.keys():
+                    if 'el_DY_S'+str(i)+'_' in key: self.templates[key].Scale(nev_el_dy_s[i-1])
+                    elif 'mu_DY_S'+str(i)+'_' in key: self.templates[key].Scale(nev_mu_dy_s[i-1])
+
         else:
             nev_el_dy_s=self.templates['el_DY_S'].Integral()
             nev_mu_dy_s=self.templates['mu_DY_S'].Integral()

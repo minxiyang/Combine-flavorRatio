@@ -5,6 +5,8 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     print('write datacard for %s %s'%(year, cg))
     if "el_DY_BL" in templates.keys():
         tmpcard=open("datacards/tmp/card_tmp_singleBin.txt", "r")
+    if "el_DY_S1" in templates.keys():
+        tmpcard=open("datacards/tmp/card_tmp_multiBins.txt", "r")
     elif isFold:
         tmpcard=open("datacards/tmp/card_fold.txt", "r")
     else:
@@ -17,10 +19,17 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     tmptxt=tmptxt.replace('nev_el_obs',str(nev_el_obs))
     if nev_el_obs==0: print("yield of dielectron for %s %s is 0"%(cg, year))
     if nev_mu_obs==0: print("yield of dimuon for %s %s is 0"%(cg, year))
-    nev_el_dy_s=templates['el_DY_S'].Integral()
-    tmptxt=tmptxt.replace('nev_el_dy_s',str(nev_el_dy_s))
-    nev_mu_dy_s=templates['mu_DY_S'].Integral()
-    tmptxt=tmptxt.replace('nev_mu_dy_s',str(nev_mu_dy_s))
+    if "el_DY_S1" in templates.keys():
+        for i in range(11):
+            nev_el_dy=templates['el_DY_S'+str(i)].Integral()
+            tmptxt=tmptxt.replace('nev_el_dy'+str(i)+' ',str(nev_el_dy)+' ')
+            nev_mu_dy=templates['mu_DY_S'+str(i)].Integral()
+            tmptxt=tmptxt.replace('nev_mu_dy'+str(i)+' ',str(nev_mu_dy)+' ')
+    else:
+        nev_el_dy_s=templates['el_DY_S'].Integral()
+        tmptxt=tmptxt.replace('nev_el_dy_s',str(nev_el_dy_s))
+        nev_mu_dy_s=templates['mu_DY_S'].Integral()
+        tmptxt=tmptxt.replace('nev_mu_dy_s',str(nev_mu_dy_s))
     if "el_DY_BL" in templates.keys():
         nev_el_dy_bl=templates['el_DY_BL'].Integral()
         tmptxt=tmptxt.replace('nev_el_dy_bl',str(nev_el_dy_bl))
@@ -31,7 +40,7 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
         nev_mu_dy_bh=templates['mu_DY_BH'].Integral()
         tmptxt=tmptxt.replace('nev_mu_dy_bh',str(nev_mu_dy_bh))
 
-    elif not isFold:
+    elif not isFold and "el_DY_S1" not in templates.keys():
         nev_el_dy_b=templates['el_DY_B'].Integral()
         tmptxt=tmptxt.replace('nev_el_dy_b',str(nev_el_dy_b))
         nev_mu_dy_b=templates['mu_DY_B'].Integral()
@@ -39,18 +48,30 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     nev_el_o=templates['el_Other'].Integral()
     tmptxt=tmptxt.replace('nev_el_o',str(nev_el_o))
     nev_mu_o=templates['mu_Other'].Integral()
-    tmptxt=tmptxt.replace('nev_mu_o',str(nev_mu_o))    
-    tmptxt=tmptxt.replace('acc_eff_med',str(acc_eff[0]))
-    tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
+    tmptxt=tmptxt.replace('nev_mu_o',str(nev_mu_o))
+    if "el_DY_S1" in templates.keys():
+        for i in range(1,11):
+            key="S"+str(i)
+            tmptxt=tmptxt.replace('acc_eff_med'+str(i)+' ',str(acc_eff[key][0])+' ')
+            tmptxt=tmptxt.replace('acc_eff_err'+str(i)+' ',str(acc_eff[key][1])+' ')
+    else:
+        tmptxt=tmptxt.replace('acc_eff_med',str(acc_eff[0]))
+        tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
     Effv=eff_corr["eff"+cg]
     tmptxt=tmptxt.replace('Effv',Effv)
     trigkey="trig"+year+cg
     Trigv=eff_corr[trigkey]
     tmptxt=tmptxt.replace('trig',trigkey)
     tmptxt=tmptxt.replace('Trigv',Trigv)
-    tmptxt=tmptxt.replace('R1','R'+year+cg)
-    tmptxt=tmptxt.replace('Rmu','Rmu'+year+cg)
-    tmptxt=tmptxt.replace('Rel','Rel'+year+cg)
+    if "el_DY_S1" in templates.keys():
+        for i in range(1,11):
+            tmptxt=tmptxt.replace('R'+str(i)+' ','R'+str(i)+'_'+year+cg+' ')
+            tmptxt=tmptxt.replace('Rmu'+str(i)+' ','Rmu'+str(i)+'_'+year+cg+' ')
+            tmptxt=tmptxt.replace('Rel'+str(i)+' ','Rel'+str(i)+'_'+year+cg+' ')
+    else:
+        tmptxt=tmptxt.replace('R1','R'+year+cg)
+        tmptxt=tmptxt.replace('Rmu','Rmu'+year+cg)
+        tmptxt=tmptxt.replace('Rel','Rel'+year+cg)
     for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID"]:
         for key in templates.keys():
             

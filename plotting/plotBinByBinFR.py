@@ -90,14 +90,14 @@ def plotBinByBinFR(year, cg, bng, med, low, high):
 
     #latex.DrawLatex(0.38, 0.945, "%i fb^{-1} (13 TeV, ee) + %i fb^{-1} (13 TeV, #mu#mu)"%(round((lumi_el[0]+lumi_el[1]+lumi_el[2])*0.001), round((lumi_mu[0]+lumi_mu[1]+lumi_mu[2])*0.001)))
     latex.SetTextSize(0.05)
-    if cg == "bb":latex.DrawLatex(0.35,0.72,"at least one endcap lepton")
+    if cg == "be":latex.DrawLatex(0.35,0.72,"at least one endcap lepton")
     else: latex.DrawLatex(0.35,0.72,"two barrel leptons")
     latexCMS.SetTextSize(0.07)
     latexCMS.SetTextFont(62)
     latexCMS.DrawLatex(0.18,0.85,"CMS")
     latexCMS.DrawLatex(0.18,0.78,"Preliminary")
     c.Update()
-    c.Print("plots/BinByBin/"+year+"_"+cg+".pdf")
+    c.Print("plots/BinByBin/"+year+"_"+cg+"MulitBin.pdf")
 
 
 
