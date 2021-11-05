@@ -48,7 +48,7 @@ def main():
             cmd='text2workspace.py -P HiggsAnalysis.CombinedLimit.FRatioPerBinModel:FRatioPerBinModel datacards/%s.txt --channel-masks -o datacards/%s.root'%(cardName, cardName)
             os.system(cmd)
             for i in range(9,10):
-                cmd="combine -M MultiDimFit --setParameters=r_bin1=1,r_bin2=1,r_bin3=1,r_bin4=1,r_bin5=1,r_bin6=1,r_bin7=1,r_bin8=1,r_bin9=1,r_bin10=1  -t -1 -m 125 --floatOtherPOIs=1  --algo=grid --points=1000 -P r_bin%s --setParameterRanges r_bin%s=0.01,10  --X-rtd MINIMIZER_analytic  datacards/%s.root"%(str(i),str(i),cardName)
+                cmd="combine -M MultiDimFit --setParameters=r_bin1=1,r_bin2=1,r_bin3=1,r_bin4=1,r_bin5=1,r_bin6=1,r_bin7=1,r_bin8=1,r_bin9=1  -t -1 -m 125 --floatOtherPOIs=1  --algo=grid --points=1000 -P r_bin%s --setParameterRanges r_bin%s=0.01,10  --X-rtd MINIMIZER_analytic  datacards/%s.root"%(str(i),str(i),cardName)
                 os.system(cmd)
                 cmd="mv higgsCombineTest.MultiDimFit.mH125.root combineOutputs/testMultiBins.root"
                 os.system(cmd)

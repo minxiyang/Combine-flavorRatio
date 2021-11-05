@@ -2,30 +2,30 @@ imax 2 numbbr of bins
 jmax * numbbr of processes
 kmax * numbbr of nuisance parameters
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-shapes *         control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_$PROCESS
-shapes el_DY_S0  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S1  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S2  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S3  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S4  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S5  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S6  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S7  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S8  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_DY_S9  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes el_Other  control /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes *         signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root mu_$PROCESS
-shapes mu_DY_S0  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S1  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S2  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S3  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S4  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S5  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S6  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S7  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S8  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_DY_S9  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
-shapes mu_Other  signal  /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes *         control templates/tmp.root el_$PROCESS
+shapes el_DY_S0  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S1  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S2  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S3  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S4  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S5  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S6  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S7  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S8  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_DY_S9  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes el_Other  control templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes *         signal  templates/tmp.root mu_$PROCESS
+shapes mu_DY_S0  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S1  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S2  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S3  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S4  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S5  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S6  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S7  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S8  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_DY_S9  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
+shapes mu_Other  signal  templates/tmp.root $PROCESS $PROCESS$SYSTEMATIC
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bin              signal         control
 observation      nev_mu_obs     nev_el_obs
