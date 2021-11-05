@@ -69,8 +69,8 @@ def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
     latex.SetNDC(True)
     if year in lumi_mu.keys(): latex.DrawLatex(0.9, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
     else: latex.DrawLatex(0.9, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
-    print("plots/NLL/%s.pdf"%output+year+cg)
+    print("plots/NLL/%s.pdf"%(output+year+cg))
     c.RedrawAxis()
-    c.Print("plots/NLL/%s.pdf"%output+year+cg)
+    c.Print("plots/NLL/%s.pdf"%(output+year+cg))
 
 
