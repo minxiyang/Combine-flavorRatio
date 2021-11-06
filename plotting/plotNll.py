@@ -22,7 +22,7 @@ def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
         
         Min=np.min(rCombine)
         
-        r=np.linspace(Min, Max,1000)
+        r=np.linspace(Min, Max,300)
         histDict[label]=ROOT.TH1D("hist"+str(count), year+" "+cg+" masscut "+str(massCut)+" GeV", len(r)-1, r)
         histDict[label].GetXaxis().SetTitle('flavor ratio')
         histDict[label].GetYaxis().SetTitle('-2#Delta lnL')
