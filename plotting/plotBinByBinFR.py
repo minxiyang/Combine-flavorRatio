@@ -97,7 +97,7 @@ def plotBinByBinFR(year, cg, bng, med, low, high):
     latexCMS.DrawLatex(0.18,0.85,"CMS")
     latexCMS.DrawLatex(0.18,0.78,"Preliminary")
     c.Update()
-    c.Print("plots/BinByBin/"+year+"_"+cg+"MulitBin.pdf")
+    c.Print("plots/BinByBin/"+year+"_"+cg+"MulitBin_floated.pdf")
 
 
 

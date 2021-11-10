@@ -1,8 +1,11 @@
 import os
 
-def plotImpact(datacard, output, isfix=True):
+def plotImpact(datacard, output, isfix=True, isMultiBins=False):
 
-    cmd= "text2workspace.py datacards/%s.txt datacards/%s.root"%(datacard, datacard)
+    if isMultiBins:
+        cmd='text2workspace.py -P HiggsAnalysis.CombinedLimit.FRatioPerBinModel:FRatioPerBinModel datacards/%s.txt --channel-masks -o datacards/%s.root'%(datacard, datacard)
+    else:
+        cmd= "text2workspace.py datacards/%s.txt datacards/%s.root"%(datacard, datacard)
     os.system(cmd) 
     cmd= "combineTool.py -M Impacts -d datacards/%s.root -m 125   "%datacard
     if isfix:
@@ -18,8 +21,15 @@ def plotImpact(datacard, output, isfix=True):
     os.system(cmd+arg1)
     os.system(cmd+arg2)
     os.system(cmd+arg3)
-    
-    cmd="plotImpacts.py -i impacts.json -o "+output+prefix
-    os.system(cmd)
-    cmd="mv %s.pdf plots/Impacts/"%(output+prefix)
-    os.system(cmd)
+    if isMultiBins: 
+        for i in range(1, 10):
+            cmd="plotImpacts.py -i impacts.json --POI r_bin"+str(i)+" -o "+output+"bin"+str(i)+prefix
+            os.system(cmd)
+        cmd="mv *.pdf plots/Impacts/"
+        os.system(cmd)
+
+    else:
+        cmd="plotImpacts.py -i impacts.json -o "+output+prefix
+        os.system(cmd)
+        cmd="mv %s.pdf plots/Impacts/"%(output+prefix)
+        os.system(cmd)
