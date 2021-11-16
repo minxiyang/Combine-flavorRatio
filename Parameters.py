@@ -22,6 +22,11 @@ shape_corr=("2016bb_MuonID","2016be_MuonID","2017be_MuonID","2018be_MuonID","201
 eff_corr={"effbb":"1.06","effbe":"1.08","trig2016bb":"1.003","trig2016be":"1.007","trig2017bb":"1.01","trig2017be":"1.01","trig2018bb":"1.01","trig2018be":"1.01"}
 data_files=("dimuon_Mordion2017_BB.txt",  "eventList_ele_2016_BB.txt",  "eventList_ele_2017_BB.txt",  "eventList_ele_2018_BB.txt", "event_list_2017_bb_clean_sort.txt",    "event_list_2018_bb_clean_sort.txt",  "dimuon_Mordion2017_BE.txt",  "eventList_ele_2016_BE.txt",  "eventList_ele_2017_BE.txt",  "eventList_ele_2018_BE.txt",  "event_list_2017_beee_clean_sort.txt",  "event_list_2018_beee_clean_sort.txt")
 
+post_fit_nev={
+              '2016be':(11300., 2900., 950., 560., 143., 68., 10.9, 2.1, 3.5),
+              '2017be':(12800., 3300., 1090., 670., 210., 62., 17., 4.8, 1.8),
+              '2018be':(18600., 5000., 1630., 1040., 340., 106., 22., 8., 6.)
+             }
 
 crossSections = {
 "dyInclusive50":5765.4,
