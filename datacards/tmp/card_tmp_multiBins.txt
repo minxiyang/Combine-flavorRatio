@@ -54,39 +54,39 @@ R8             param      acc_eff_med8             acc_eff_err8
 R9             param      acc_eff_med9             acc_eff_err9 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-R1             rateParam  signal                   mu_DY_S1     acc_eff_med1   [0,2] 
-R2             rateParam  signal                   mu_DY_S2     acc_eff_med2   [0,2]
-R3             rateParam  signal                   mu_DY_S3     acc_eff_med3   [0,2]
-R4             rateParam  signal                   mu_DY_S4     acc_eff_med4   [0,2]
-R5             rateParam  signal                   mu_DY_S5     acc_eff_med5   [0,2]
-R6             rateParam  signal                   mu_DY_S6     acc_eff_med6   [0,2]
-R7             rateParam  signal                   mu_DY_S7     acc_eff_med7   [0,2]
-R8             rateParam  signal                   mu_DY_S8     acc_eff_med8   [0,2]
-R9             rateParam  signal                   mu_DY_S9     acc_eff_med9   [0,2]
+R1             rateParam  signal                   mu_DY_S1     acc_eff_med1   [0,3.5] 
+R2             rateParam  signal                   mu_DY_S2     acc_eff_med2   [0,3.5]
+R3             rateParam  signal                   mu_DY_S3     acc_eff_med3   [0,3.5]
+R4             rateParam  signal                   mu_DY_S4     acc_eff_med4   [0,3.5]
+R5             rateParam  signal                   mu_DY_S5     acc_eff_med5   [0,3.5]
+R6             rateParam  signal                   mu_DY_S6     acc_eff_med6   [0,3.5]
+R7             rateParam  signal                   mu_DY_S7     acc_eff_med7   [0,3.5]
+R8             rateParam  signal                   mu_DY_S8     acc_eff_med8   [0,3.5]
+R9             rateParam  signal                   mu_DY_S9     acc_eff_med9   [0,3.5]
 Rmu1           rateParam  signal                   mu_DY_S1     (@0) Rel1       
-Rel1           rateParam  control                  el_DY_S1     nev_el_dy1      [0,999999]
+Rel1           rateParam  control                  el_DY_S1     fev_el_dy1      [Rel1L,Rel1H]
 Rmu2           rateParam  signal                   mu_DY_S2     (@0) Rel2       
-Rel2           rateParam  control                  el_DY_S2     nev_el_dy2      [0,999999]
+Rel2           rateParam  control                  el_DY_S2     fev_el_dy2      [Rel2L,Rel2H]
 Rmu3           rateParam  signal                   mu_DY_S3     (@0) Rel3       
-Rel3           rateParam  control                  el_DY_S3     nev_el_dy3      [0,999999]
+Rel3           rateParam  control                  el_DY_S3     fev_el_dy3      [Rel3L,Rel3H]
 Rmu4           rateParam  signal                   mu_DY_S4     (@0) Rel4 
-Rel4           rateParam  control                  el_DY_S4     nev_el_dy4      [0,999999]
+Rel4           rateParam  control                  el_DY_S4     fev_el_dy4      [Rel4L,Rel4H]
 Rmu5           rateParam  signal                   mu_DY_S5     (@0) Rel5 
-Rel5           rateParam  control                  el_DY_S5     nev_el_dy5      [0,999999]
+Rel5           rateParam  control                  el_DY_S5     fev_el_dy5      [Rel5L,Rel5H]
 Rmu6           rateParam  signal                   mu_DY_S6     (@0) Rel6 
-Rel6           rateParam  control                  el_DY_S6     nev_el_dy6      [0,999999]
+Rel6           rateParam  control                  el_DY_S6     fev_el_dy6      [Rel6L,Rel6H]
 Rmu7           rateParam  signal                   mu_DY_S7     (@0) Rel7 
-Rel7           rateParam  control                  el_DY_S7     nev_el_dy7      [0,999999]
+Rel7           rateParam  control                  el_DY_S7     fev_el_dy7      [Rel7L,Rel7H]
 Rmu8           rateParam  signal                   mu_DY_S8     (@0) Rel8 
-Rel8           rateParam  control                  el_DY_S8     nev_el_dy8      [0,999999]
+Rel8           rateParam  control                  el_DY_S8     fev_el_dy8      [Rel8L,Rel8H]
 Rmu9           rateParam  signal                   mu_DY_S9     (@0) Rel9 
-Rel9           rateParam  control                  el_DY_S9     nev_el_dy9      [0,999999]
+Rel9           rateParam  control                  el_DY_S9     fev_el_dy9      [Rel9L,Rel9H]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 signal              autoMCStats 0 0 1
 control             autoMCStats 0 0 1
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-massBin9 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7 Rel8  
-massBin8 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7  
+#massBin9 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7 Rel8 Rel9 
+#massBin8 group = Rel1 Rel2 Rel3 Rel4 Rel5 Rel6 Rel7  
 
 
 

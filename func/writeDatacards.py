@@ -1,4 +1,4 @@
-from Parameters import eff_corr
+from Parameters import eff_corr, post_fit_nev
 
 def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=False):
 
@@ -19,12 +19,22 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     tmptxt=tmptxt.replace('nev_el_obs',str(nev_el_obs))
     if nev_el_obs==0: print("yield of dielectron for %s %s is 0"%(cg, year))
     if nev_mu_obs==0: print("yield of dimuon for %s %s is 0"%(cg, year))
+   
     if "el_DY_S1" in templates.keys():
         for i in range(10):
             nev_el_dy=templates['el_DY_S'+str(i)].Integral()
+            #if cg=="be" and i>0: nev_el_dy1=post_fit_nev[year+cg][i-1]
+            nev_el_dy1=nev_el_dy
+            #nev_el_dy=templates['el_DY_S'+str(i)].Integral()
             tmptxt=tmptxt.replace('nev_el_dy'+str(i),str(nev_el_dy))
+            tmptxt=tmptxt.replace('fev_el_dy'+str(i),str(nev_el_dy1))
             nev_mu_dy=templates['mu_DY_S'+str(i)].Integral()
             tmptxt=tmptxt.replace('nev_mu_dy'+str(i),str(nev_mu_dy))
+            if year+cg != "2016bb":
+                tmptxt=tmptxt.replace('Rel'+str(i)+'L',str(0.0))
+            else:
+                tmptxt=tmptxt.replace('Rel'+str(i)+'L',str(0.0))
+            tmptxt=tmptxt.replace('Rel'+str(i)+'H',str(10.*nev_el_dy))
     else:
         nev_el_dy_s=templates['el_DY_S'].Integral()
         tmptxt=tmptxt.replace('nev_el_dy_s',str(nev_el_dy_s))
@@ -68,6 +78,8 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
             tmptxt=tmptxt.replace('R'+str(i),'R'+str(i)+'_'+year+cg)
             tmptxt=tmptxt.replace('Rmu'+str(i),'Rmu'+str(i)+'_'+year+cg)
             tmptxt=tmptxt.replace('Rel'+str(i),'Rel'+str(i)+'_'+year+cg)
+            #tmptxt=tmptxt.replace('Rel'+str(i)+'L',)
+            #tmptxt=tmptxt.replace('Rel'+str(i)+'H',)
     else:
         tmptxt=tmptxt.replace('R1','R'+year+cg)
         tmptxt=tmptxt.replace('Rmu','Rmu'+year+cg)
