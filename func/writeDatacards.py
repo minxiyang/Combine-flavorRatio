@@ -1,6 +1,8 @@
-from Parameters import eff_corr, post_fit_nev
+from Parameters import eff_corr, post_fit_nev, def_bng
+import ROOT
 
-def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=False):
+
+def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=False, massCut=0):
 
     print('write datacard for %s %s'%(year, cg))
     if "el_DY_BL" in templates.keys():
@@ -69,28 +71,51 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
         tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
     Effv=eff_corr["eff"+cg]
     tmptxt=tmptxt.replace('Effv',Effv)
-    trigkey="trig"+year+cg
+    if year == "Run3": yr="2018"
+    else: yr=year
+    trigkey="trig"+yr+cg
     Trigv=eff_corr[trigkey]
-    tmptxt=tmptxt.replace('trig',trigkey)
+    tmptxt=tmptxt.replace('trig', 'trig'+year+cg)
     tmptxt=tmptxt.replace('Trigv',Trigv)
     if "el_DY_S1" in templates.keys():
         for i in range(1,10):
             tmptxt=tmptxt.replace('R'+str(i),'R'+str(i)+'_'+year+cg)
             tmptxt=tmptxt.replace('Rmu'+str(i),'Rmu'+str(i)+'_'+year+cg)
             tmptxt=tmptxt.replace('Rel'+str(i),'Rel'+str(i)+'_'+year+cg)
+            data_uncer=ROOT.Double(0)
+            lowEdge=templates['el_data_obs'].FindBin(def_bng[i-1])
+            highEdge=templates['el_data_obs'].FindBin(def_bng[i])
+            if i==9:
+                norm=templates['el_data_obs'].IntegralAndError(i, -1, data_uncer)
+            else:
+                norm=templates['el_data_obs'].IntegralAndError(i, i+1, data_uncer)
+            if norm==0:
+                tmptxt=tmptxt.replace('data_uncer'+str(i), str(1.))
+            else:
+                tmptxt=tmptxt.replace('data_uncer'+str(i), str(data_uncer))
             #tmptxt=tmptxt.replace('Rel'+str(i)+'L',)
             #tmptxt=tmptxt.replace('Rel'+str(i)+'H',)
     else:
         tmptxt=tmptxt.replace('R1','R'+year+cg)
         tmptxt=tmptxt.replace('Rmu','Rmu'+year+cg)
         tmptxt=tmptxt.replace('Rel','Rel'+year+cg)
-    for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID"]:
-        for key in templates.keys():
+        data_uncer=ROOT.Double(0)
+        lowEdge=templates['el_data_obs'].FindBin(massCut)
+        norm=templates['el_data_obs'].IntegralAndError(lowEdge, -1, data_uncer)
+        tmptxt=tmptxt.replace('data_uncer',str(data_uncer))
+    if year == "Run3":
+        for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID","eff"]:
+            tmptxt=tmptxt.replace(uncer, uncer+"_"+year+cg)
             
-            if "Down" in key and uncer in key.split("_")[-1] and "S" not in key.split("_")[-2] and "B" not in key.split("_")[-2] and "Other" not in key.split("_")[-2]: 
-                key1=key.strip("Down")
-                tmptxt=tmptxt.replace(uncer, key1.split("_")[-2]+"_"+uncer)
-                break   
+            
+    else:
+        for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID"]:
+            for key in templates.keys():
+            
+                if "Down" in key and uncer in key.split("_")[-1] and "S" not in key.split("_")[-2] and "B" not in key.split("_")[-2] and "Other" not in key.split("_")[-2]: 
+                    key1=key.strip("Down")
+                    tmptxt=tmptxt.replace(uncer, key1.split("_")[-2]+"_"+uncer)
+                    break   
     datacard=open("datacards/"+cardName+".txt", "w")  
     datacard.write(tmptxt)
     tmpcard.close()

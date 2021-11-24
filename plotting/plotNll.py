@@ -4,7 +4,9 @@ import root_numpy
 import numpy as np
 from Parameters import lumi_el, lumi_mu
 from plotting.setTDRStyle import setTDRStyle
-def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
+
+
+def plotNll(year, cg, massCut, isLabel, output, ith, **rootFiles):
 	
     ROOT.gStyle.SetOptStat(0)
     count=0
@@ -15,14 +17,14 @@ def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
         f1=ROOT.TFile.Open("combineOutputs/"+rootFile+".root","r")
         tree=f1.Get("limit")
         nllCombine=root_numpy.tree2array(tree,"deltaNLL")
-        if i==0:rCombine=root_numpy.tree2array(tree,"r")
-        else: rCombine=root_numpy.tree2array(tree,"r_bin"+str(i))
+        if ith==0:rCombine=root_numpy.tree2array(tree,"r")
+        else: rCombine=root_numpy.tree2array(tree,"r_bin"+str(ith))
          
         Max=np.max(rCombine)
         
         Min=np.min(rCombine)
         
-        r=np.linspace(Min, Max,200)
+        r=np.linspace(Min, Max,300)
         histDict[label]=ROOT.TH1D("hist"+str(count), year+" "+cg+" masscut "+str(massCut)+" GeV", len(r)-1, r)
         histDict[label].GetXaxis().SetTitle('flavor ratio')
         histDict[label].GetYaxis().SetTitle('-2#Delta lnL')
@@ -59,18 +61,24 @@ def plotNll(year, cg, massCut, isLabel, output, i, **rootFiles):
     latexCMS.SetTextFont(61)
     latexCMS.SetNDC(True)
     latexCMS.SetTextSize(0.06)
-    #latexCMS.DrawLatex(0.19,0.88,"CMS")
+    latexCMS.DrawLatex(0.19,0.88,"CMS")
     latexCMS.SetTextSize(0.045)
-    #latexCMS.DrawLatex(0.19,0.82,"Preliminary")
+    latexCMS.DrawLatex(0.19,0.82,"Preliminary")
     latex = ROOT.TLatex()
     latex.SetTextFont(42)
     latex.SetTextAlign(31)
     latex.SetTextSize(0.022)
     latex.SetNDC(True)
     if year in lumi_mu.keys(): latex.DrawLatex(0.9, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
+    elif year == "Run3": latex.DrawLatex(0.9, 0.96, "160 fb^{-1} (13 TeV, #mu#mu ), 160 fb^{-1} (13 TeV, ee)")
     else: latex.DrawLatex(0.9, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
-    print("plots/NLL/%s.pdf"%(output+year+cg))
+    #print("plots/NLL/%s.pdf"%(output+year+cg))
+    #print(ith)
     c.RedrawAxis()
-    c.Print("plots/NLL/%s.pdf"%(output+year+cg))
+    if ith==0:
+        c.Print("plots/NLL/%s_massCut_%s.pdf"%((output+year+cg), str(massCut)))
+    else:
+        #print(output+year+cg+"_bin"+str(ith))
+        c.Print("plots/NLL/%s.pdf"%(output+year+cg+"_bin"+str(ith)))
 
 

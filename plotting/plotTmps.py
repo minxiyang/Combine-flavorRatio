@@ -111,8 +111,15 @@ def plotTmps(year, cg, massCut, tmps, fr=1.):
         latexCMS.DrawLatex(0.19,0.88,"CMS")
         latexCMSExtra.DrawLatex(0.19,yLabelPos,"%s"%(cmsExtra))
         latex.SetTextSize(0.022)
-        if year in lumi_mu.keys(): latex.DrawLatex(0.67, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
-        else: latex.DrawLatex(0.67, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
+        if flavor == "mu":
+            if year in lumi_mu.keys(): latex.DrawLatex(0.77, 0.96, "%s fb^{-1} (13 TeV, #mu#mu )"%(str(int(lumi_mu[year]/1000))))
+            elif year == "Run3": latex.DrawLatex(0.77, 0.96, "160 fb^{-1} (13 TeV, #mu#mu )")
+            else: latex.DrawLatex(0.77, 0.96, "140 fb^{-1} (13 TeV, #mu#mu )")
+        else:
+            if year in lumi_mu.keys(): latex.DrawLatex(0.77, 0.96, "%s fb^{-1} (13 TeV, ee)"%(str(int(lumi_el[year]/1000))))
+            elif year == "Run3": latex.DrawLatex(0.77, 0.96, "160 fb^{-1} (13 TeV, ee)")
+            else: latex.DrawLatex(0.77, 0.96, "137 fb^{-1} (13 TeV, ee)")
+
         if fr==1: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_template.pdf"
         else: plotName = flavor+"_"+year+"_"+cg+"_cut"+str(massCut)+"_"+str(fr)+"fr"+"_template.pdf"
         c.Update()

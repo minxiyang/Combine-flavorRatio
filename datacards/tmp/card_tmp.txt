@@ -2,14 +2,14 @@ imax 2 numbbr of bins
 jmax 5 numbbr of processes minus 1
 kmax * numbbr of nuisance parameters
 -----------------------------------------------------------------------------------------------------------------------------------------------
-shapes *                   control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root el_$PROCESS
-shapes el_DY_S             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
-shapes el_DY_B             control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
-shapes el_Other            control             /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
-shapes *                   signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root mu_$PROCESS
-shapes mu_DY_S             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
-shapes mu_DY_B             signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
-shapes mu_Other            signal              /depot/cms/private/users/minxi/lepratio/LimitSetting/ZprimetoMuMu/templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes *                   control             templates/tmp.root el_$PROCESS
+shapes el_DY_S             control             templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_DY_B             control             templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes el_Other            control             templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes *                   signal              templates/tmp.root mu_$PROCESS
+shapes mu_DY_S             signal              templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_DY_B             signal              templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
+shapes mu_Other            signal              templates/tmp.root $PROCESS       $PROCESS$SYSTEMATIC
 -----------------------------------------------------------------------------------------------------------------------------------------------
 bin          signal        control
 observation  nev_mu_obs    nev_el_obs   
@@ -28,6 +28,7 @@ _MuonID                  shape     1.0                 1.0                1.0   
 _trig                    lnN       -                   Trigv              Trigv               -                    -                    -
 _eff                     lnN       Effv                -                  -                   Effv                 Effv                 Effv
 R1                       param     acc_eff_med         acc_eff_err
+Rel                      param     nev_el_dy_s         data_uncer
 -----------------------------------------------------------------------------------------------------------------------------------------------              
 R1                  rateParam     signal              mu_DY_S            acc_eff_med
 Rmu                 rateParam     signal              mu_DY_S            (@0) Rel 

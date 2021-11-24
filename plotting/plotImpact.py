@@ -7,16 +7,16 @@ def plotImpact(datacard, output, isfix=True, isMultiBins=False):
     else:
         cmd= "text2workspace.py datacards/%s.txt datacards/%s.root"%(datacard, datacard)
     os.system(cmd) 
-    cmd= "combineTool.py -M Impacts -d datacards/%s.root -m 125   "%datacard
+    cmd= "combineTool.py -M Impacts --allPars -d datacards/%s.root -m 125   "%datacard
     if isfix:
         arg1="--doInitialFit -t -1 --toysFrequentist --expectSignal 1 --X-rtd MINIMIZER_analytic"
         arg2="--doFits -t -1 --toysFrequentist --expectSignal 1 --X-rtd MINIMIZER_analytic"
         arg3="--autoBoundsPOIs r -t -1 --toysFrequentist --expectSignal 1 --X-rtd MINIMIZER_analytic -o impacts.json"
         prefix="_fixed"
     else:
-        arg1=" --doInitialFit --robustFit 1"
-        arg2=" --doFits --robustFit 1"
-        arg3=" -o impacts.json"
+        arg1="--X-rtd MINIMIZER_analytic --doInitialFit >> log1.txt"
+        arg2="--X-rtd MINIMIZER_analytic --doFits >> log2.txt"
+        arg3="--X-rtd MINIMIZER_analytic -o impacts.json >> log3.txt"
         prefix="_floated"
     os.system(cmd+arg1)
     os.system(cmd+arg2)

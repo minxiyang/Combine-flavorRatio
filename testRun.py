@@ -14,9 +14,9 @@ def main():
 
     cardNames=[]
     scanRange=(0.2, 1.8)
-    massCut=400
+    massCut=1000
     print("test run with mass cutoff "+str(massCut))
-    for year in ["2016", "2017", "2018"]:
+    for year in ["2016","2017","2018"]:
         for cg in ["bb","be"]:
         
             cardName="ch"+year+cg+"_"+str(massCut)+"cut"
@@ -30,18 +30,18 @@ def main():
 
             tmps.saveTmps(tmpName)
             plotTmps(year, cg, massCut, tmps.templates)
-            writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
-            runCB(scanRange, fileName, cardName)
+            writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff, massCut=massCut)
+            runCB(scanRange, fileName, 0, cardName)
             inputs={"result":fileName}
-            plotNll(year, cg, massCut, False, plotName, **inputs)
+            plotNll(year, cg, massCut, False, "nll", 0, **inputs)
             impactOut="Impact_cut"+str(massCut)+"_"+year+"_"+cg
             #plotImpact(cardName, impactOut)
             #plotImpact(cardName, impactOut, False)
             
             
-    runCB(scanRange, "allYearCombine_cut"+str(massCut), *cardNames)
+    runCB(scanRange, "allYearCombine_cut"+str(massCut), 0, *cardNames)
     inputs={"result":"allYearCombine_cut"+str(massCut)}
-    plotNll("All year", "all category", massCut, False, "allYearCombine_cut"+str(massCut), **inputs)
+    plotNll("", "all", massCut, False, "combine", 0, **inputs)
     #plotImpact("combinedCard", "allYearCombine_cut"+str(massCut))
     #plotImpact("combinedCard", "allYearCombine_cut"+str(massCut), False)
         
