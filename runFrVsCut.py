@@ -7,12 +7,12 @@ from plotting.plotTmps import plotTmps
 from Parameters import sys_uncers 
 from func.getFrAndLimits import getFrAndLimits
 from plotting.plotFrVsCut import plotFrVsCut
-
+from func.writeTxt import writeTxt
 
 def main():
 
-    scanRange=(0.1, 4.1)
-    massCuts=range(400, 1201, 100)
+    scanRange=(0, 5.)
+    massCuts=range(400, 1201, 200)
     #massCuts=[1250]
     frsLeft2={}
     frsLeft1={}
@@ -39,15 +39,15 @@ def main():
                 tmps.saveTmps(tmpName)
                 #plotTmps(year, cg, tmps.templates)
                 writeDatacards(cardName, tmpName, year, cg, tmps.templates, acc_eff)
-                runCB(scanRange, fileName, cardName)
-                fr=getFrAndLimits(fileName)
+                runCB(scanRange, fileName, 0, cardName)
+                fr=getFrAndLimits(fileName, 0)
                 print(fr)
                 inv=0.2
                 while fr[0]==0. or fr[4]==0.:
                     print("rerun combine")
                     print((fr[2]-inv, fr[2]+inv)) 
-                    runCB((fr[2]-inv, fr[2]+inv), fileName, cardName)
-                    fr=getFrAndLimits(fileName)
+                    runCB((fr[2]-inv, fr[2]+inv), fileName, 0, cardName)
+                    fr=getFrAndLimits(fileName, 0)
                     inv=inv*0.9
                     print(fr)
                 if key in frsLeft2.keys(): frsLeft2[key].append(fr[0])
@@ -63,15 +63,15 @@ def main():
                  
             
             
-        runCB(scanRange, "allYearCombine", *cardNames)
+        runCB(scanRange, "allYearCombine", 0, *cardNames)
         fr=getFrAndLimits("allYearCombine")
         print(fr)
         inv=0.2
         while fr[0]==0. or fr[4]==0.:
             print("rerun combine")
             print((fr[2]-inv, fr[2]+inv))
-            runCB((fr[2]-inv, fr[2]+inv), fileName, *cardNames)
-            fr=getFrAndLimits(fileName)
+            runCB((fr[2]-inv, fr[2]+inv), fileName, 0, *cardNames)
+            fr=getFrAndLimits(fileName, 0)
             inv=inv*0.9
             print(fr)
 
@@ -87,7 +87,11 @@ def main():
         if key in frsRight2.keys(): frsRight2[key].append(fr[4])
         else: frsRight2[key]=[fr[4]]
 
-    print(frsLeft2)
+    writeTxt("frByCutL2",frsLeft2)
+    writeTxt("frByCutL1",frsLeft1)
+    writeTxt("frByCutM",frsMed)
+    writeTxt("frByCutR1",frsRight1)
+    writeTxt("frByCutR2",frsRight2)
     print(frsLeft1)
     print(frsMed)
     print(frsRight1)
@@ -95,10 +99,10 @@ def main():
     for year in ["2016","2017","2018"]:
         for cg in ["bb","be"]:
             key=year+cg
-            plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, key)
+            plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, key+"v2")
 
     key="allYearCombine"    
-    plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, "allYearCombine")    
+    plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, "allYearCombinev2")    
 
 if __name__=="__main__":
     main()

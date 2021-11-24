@@ -49,7 +49,7 @@ def main():
             #os.system(cmd)
             impactOut="Impact_multiBins_"+year+"_"+cg
             #plotImpact(cardName, impactOut, False, True)
-            for i in range(9,10):
+            for i in range(1,10):
                 #cmd="combine -M MultiDimFit --algo=grid --floatOtherPOIs 1 -P r_bin%s --points=300   --setParameterRanges r_bin%s=0,3 -d  datacards/%s.root   "%(str(i),str(i),cardName)
                 #os.system(cmd)
                 #cmd="mv higgsCombineTest.MultiDimFit.mH120.root   combineOutputs/testMultiBins.root"
@@ -71,7 +71,7 @@ def main():
     FRhigh["allYearCombine"]=[]
     FRhigh["allYearCombine_bb"]=[]
     FRhigh["allYearCombine_be"]=[]
-    for i in range(9,10):        
+    for i in range(1,10):        
         runCB(scanRange, "allYearCombine_mulitBins", i, *cardNames)
         if i==9:
             impactOut="Impact_mulitBins_allYearCombine"
@@ -104,12 +104,12 @@ def main():
         FRhigh["allYearCombine_be"].append(str(frs[3]))
         FRlow["allYearCombine_be"].append(str(frs[1]))
 
-    print(FRlow)
-    print(FRmed)
-    print(FRhigh)
-    #writeTxt("multiBins_low", FRlow)
-    #writeTxt("multiBins_med", FRmed)
-    #writeTxt("multiBins_high", FRhigh)
+    #print(FRlow)
+    #print(FRmed)
+    #print(FRhigh)
+    writeTxt("multiBins_low", FRlow)
+    writeTxt("multiBins_med", FRmed)
+    writeTxt("multiBins_high", FRhigh)
   
 if __name__=="__main__":
     main()

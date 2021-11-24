@@ -14,7 +14,7 @@ def main():
 
     cardNames=[]
     scanRange=(0.2, 1.8)
-    massCut=1000
+    massCut=400
     print("test run with mass cutoff "+str(massCut))
     for year in ["2016","2017","2018"]:
         for cg in ["bb","be"]:
