@@ -4,6 +4,7 @@ import numpy as np
 def getAccEffAndErr(year, cg, massCut, massCutH=0):
 
     dyHist2D={}
+    if year=="Run3": year="2018"
     f_mu=ROOT.TFile.Open("MC/"+"DY_mu_"+year+".root","r")
     dyHist2D["mu"]=f_mu.Get("DimuonResponse_"+cg)
     dyHist2D["mu"].SetDirectory(0)

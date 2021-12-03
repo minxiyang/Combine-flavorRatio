@@ -41,8 +41,8 @@ _Smear         shape       1.0         1.0         1.0         1.0         1.0  
 _Prefire       shape       -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          1.0
 _PUScale       shape       -           -           -           -           -           -           -           -           -           -           -          1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0          1.0
 _MuonID        shape       1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0        -           -           -           -           -           -           -           -           -           -            -
-_trig          lnN         Trigv       -           -           -           -           -           -           -           -           -           Trigv      -           -           -           -           -           -           -           -           -           -            -
-_eff           lnN         -           Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv       Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv         Effv
+_trig          lnN         Trigv       Trigv       Trigv       Trigv       Trigv       Trigv       Trigv       Trigv       Trigv       Trigv       Trigv      -           -           -           -           -           -           -           -           -           -            -
+_eff           lnN         -           -           -           -           -           -           -           -           -           -           -          Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv        Effv         Effv
 R1             param      acc_eff_med1             acc_eff_err1 
 R2             param      acc_eff_med2             acc_eff_err2 
 R3             param      acc_eff_med3             acc_eff_err3 
@@ -52,15 +52,15 @@ R6             param      acc_eff_med6             acc_eff_err6
 R7             param      acc_eff_med7             acc_eff_err7 
 R8             param      acc_eff_med8             acc_eff_err8 
 R9             param      acc_eff_med9             acc_eff_err9 
-Rel1           param      fev_el_dy1               data_uncer1
-Rel2           param      fev_el_dy2               data_uncer2
-Rel3           param      fev_el_dy3               data_uncer3
-Rel4           param      fev_el_dy4               data_uncer4
-Rel5           param      fev_el_dy5               data_uncer5
-Rel6           param      fev_el_dy6               data_uncer6
-Rel7           param      fev_el_dy7               data_uncer7
-Rel8           param      fev_el_dy8               data_uncer8
-Rel9           param      fev_el_dy9               data_uncer9
+#Rel1           param      fev_el_dy1               data_uncer1
+#Rel2           param      fev_el_dy2               data_uncer2
+#Rel3           param      fev_el_dy3               data_uncer3
+#Rel4           param      fev_el_dy4               data_uncer4
+#Rel5           param      fev_el_dy5               data_uncer5
+#Rel6           param      fev_el_dy6               data_uncer6
+#Rel7           param      fev_el_dy7               data_uncer7
+#Rel8           param      fev_el_dy8               data_uncer8
+#Rel9           param      fev_el_dy9               data_uncer9
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 R1             rateParam  signal                   mu_DY_S1     acc_eff_med1   [0,3.5] 

@@ -71,7 +71,7 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
         tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
     Effv=eff_corr["eff"+cg]
     tmptxt=tmptxt.replace('Effv',Effv)
-    if year == "Run3": yr="2018"
+    if year == "Run3": yr="Run3"
     else: yr=year
     trigkey="trig"+yr+cg
     Trigv=eff_corr[trigkey]
@@ -105,7 +105,7 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
         tmptxt=tmptxt.replace('data_uncer',str(data_uncer))
     if year == "Run3":
         for uncer in ["muMassScale","elMassScale","Smear","Prefire","PUScale","MuonID","eff"]:
-            tmptxt=tmptxt.replace(uncer, uncer+"_"+year+cg)
+            tmptxt=tmptxt.replace(uncer, "Run3"+cg+"_"+uncer)
             
             
     else:

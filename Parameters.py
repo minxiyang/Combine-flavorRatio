@@ -23,8 +23,8 @@ lumi_mu = {"2016":36.3*1000, "2017":42.135*1000, "2018":61.608*1000}
 
 
 sys_uncers={"el":('MassScaleUp', 'MassScaleDown' ,'PrefireUp', 'PrefireDown', 'PUScaleUp', 'PUScaleDown'), "mu":('Smear', 'MassScaleUp', 'MassScaleDown', 'MuonID')}
-shape_corr=("2016bb_MuonID","2016be_MuonID","2017be_MuonID","2018be_MuonID","2016bb_Smear","2016be_Smear", "2017be_Smear", "2018be_Smear", "2016bbbe_muMassScale", "2016bb_elMassScale", "2016be_elMassScale", "2017bb_elMassScale", "2017be_elMassScale", "2018bb_elMassScale", "2018be_elMassScale")
-eff_corr={"effbb":"1.06","effbe":"1.08","trig2016bb":"1.003","trig2016be":"1.007","trig2017bb":"1.01","trig2017be":"1.01","trig2018bb":"1.01","trig2018be":"1.01"}
+shape_corr=("2016bb_MuonID","2016be_MuonID","2017be_MuonID","2018be_MuonID","2016bb_Smear","2016be_Smear", "2017be_Smear", "2018be_Smear", "2016bbbe_muMassScale", "2016bb_elMassScale", "2016be_elMassScale", "2017bb_elMassScale", "2017be_elMassScale", "2018bb_elMassScale", "2018be_elMassScale", "Run3bb_muMassScale", "Run3bb_elMassScale", "Run3bb_Smear", "Run3bb_MuonID", "Run3bb_Prefire", "Run3bb_PUScale", "Run3be_muMassScale", "Run3be_elMassScale", "Run3be_Smear", "Run3be_MuonID", "Run3be_Prefire", "Run3be_PUScale")
+eff_corr={"effbb":"1.06","effbe":"1.08","trig2016bb":"1.003","trig2016be":"1.007","trig2017bb":"1.01","trig2017be":"1.01","trig2018bb":"1.01","trig2018be":"1.01", "effRun3bb":"1.06", "effRun3be":"1.08", "trigRun3bb":"1.01", "trigRun3be":"1.01"}
 data_files=("dimuon_Mordion2017_BB.txt",  "eventList_ele_2016_BB.txt",  "eventList_ele_2017_BB.txt",  "eventList_ele_2018_BB.txt", "event_list_2017_bb_clean_sort.txt",    "event_list_2018_bb_clean_sort.txt",  "dimuon_Mordion2017_BE.txt",  "eventList_ele_2016_BE.txt",  "eventList_ele_2017_BE.txt",  "eventList_ele_2018_BE.txt",  "event_list_2017_beee_clean_sort.txt",  "event_list_2018_beee_clean_sort.txt")
 
 post_fit_nev={

@@ -48,12 +48,8 @@ def main():
             #cmd='text2workspace.py -P HiggsAnalysis.CombinedLimit.FRatioPerBinModel:FRatioPerBinModel datacards/%s.txt --channel-masks -o datacards/%s.root'%(cardName, cardName)
             #os.system(cmd)
             impactOut="Impact_multiBins_"+year+"_"+cg
-            #plotImpact(cardName, impactOut, False, True)
+            plotImpact(cardName, impactOut, False, True)
             for i in range(1,10):
-                #cmd="combine -M MultiDimFit --algo=grid --floatOtherPOIs 1 -P r_bin%s --points=300   --setParameterRanges r_bin%s=0,3 -d  datacards/%s.root   "%(str(i),str(i),cardName)
-                #os.system(cmd)
-                #cmd="mv higgsCombineTest.MultiDimFit.mH120.root   combineOutputs/testMultiBins.root"
-                #os.system(cmd)
                 runCB(scanRange, fileName, i, cardName) 
                 inputs={"result":fileName+str(i)}
                 plotNll(year, cg, 0, False, plotName, i, **inputs)
@@ -75,7 +71,7 @@ def main():
         runCB(scanRange, "allYearCombine_mulitBins", i, *cardNames)
         if i==9:
             impactOut="Impact_mulitBins_allYearCombine"
-            #plotImpact("combinedCard", impactOut, False, True)
+            plotImpact("combinedCard", impactOut, False, True)
         frs=getFrAndLimits("allYearCombine_mulitBins"+str(i),i)
         inputs={"result":"allYearCombine_mulitBins"+str(i)}
         plotNll("all", "all", 0, False, "allYearCombine_mulitBins", i, **inputs)
@@ -85,7 +81,7 @@ def main():
         runCB(scanRange, "allYearCombine_mulitBins_bb", i, *cardNames_bb)
         if i==9:
             impactOut="Impact_multiBins_allYearCombine_bb"
-            #plotImpact("combinedCard", impactOut, False, True)
+            plotImpact("combinedCard", impactOut, False, True)
         inputs={"result":"allYearCombine_mulitBins_bb"+str(i)}
         plotNll("all", "bb", 0, False, "allYearCombine_mulitBins", i, **inputs)
         frs=getFrAndLimits("allYearCombine_mulitBins_bb"+str(i),i)
@@ -97,16 +93,16 @@ def main():
         plotNll("all", "be", 0, False, "allYearCombine_mulitBins", i, **inputs)
         if i==9:
             impactOut="Impact_multiBins_allYearCombine_be"
-            #plotImpact("combinedCard", impactOut, False, True)
+            plotImpact("combinedCard", impactOut, False, True)
         inputs={"result":"allYearCombine_mulitBins_be"+str(i)}
         frs=getFrAndLimits("allYearCombine_mulitBins_be"+str(i),i)
         FRmed["allYearCombine_be"].append(str(frs[2]))
         FRhigh["allYearCombine_be"].append(str(frs[3]))
         FRlow["allYearCombine_be"].append(str(frs[1]))
 
-    #print(FRlow)
-    #print(FRmed)
-    #print(FRhigh)
+    print(FRlow)
+    print(FRmed)
+    print(FRhigh)
     writeTxt("multiBins_low", FRlow)
     writeTxt("multiBins_med", FRmed)
     writeTxt("multiBins_high", FRhigh)

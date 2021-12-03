@@ -14,9 +14,9 @@ def plotImpact(datacard, output, isfix=True, isMultiBins=False):
         arg3="--autoBoundsPOIs r -t -1 --toysFrequentist --expectSignal 1 --X-rtd MINIMIZER_analytic -o impacts.json"
         prefix="_fixed"
     else:
-        arg1="--X-rtd MINIMIZER_analytic --doInitialFit >> log1.txt"
-        arg2="--X-rtd MINIMIZER_analytic --doFits >> log2.txt"
-        arg3="--X-rtd MINIMIZER_analytic -o impacts.json >> log3.txt"
+        arg1="--X-rtd MINIMIZER_analytic --doInitialFit --setParameterRanges r_bin1=0.0,5.0:r_bin2=0.0,5.0:r_bin3=0.0,5.0:r_bin4=0.0,5.0:r_bin5=0.0,5.0:r_bin6=0.0,5.0:r_bin7=0.0,5.0:r_bin8=0.0,5.0:r_bin9=0.0,5.0:"
+        arg2="--X-rtd MINIMIZER_analytic --doFits --setParameterRanges r_bin1=0.0,5.0:r_bin2=0.0,5.0:r_bin3=0.0,5.0:r_bin4=0.0,5.0:r_bin5=0.0,5.0:r_bin6=0.0,5.0:r_bin7=0.0,5.0:r_bin8=0.0,5.0:r_bin9=0.0,5.0"
+        arg3="--X-rtd MINIMIZER_analytic -o impacts.json "
         prefix="_floated"
     os.system(cmd+arg1)
     os.system(cmd+arg2)

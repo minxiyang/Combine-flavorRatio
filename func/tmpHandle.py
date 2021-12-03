@@ -18,7 +18,7 @@ class tmpHandle(object):
         print("create templates for %s %s"%(self.year, self.cg) )
         templates={}
         bins=def_bng
-        print(bins) 
+         
         for flavor in ['mu', 'el']:
              
             bng=getBngs(flavor, self.year, self.cg, 150)
@@ -80,7 +80,11 @@ class tmpHandle(object):
                 for corr in shape_corr:
                     key1=key.strip('Up')
                     key2=key1.strip('Down')
-                    if key2 in corr and self.cg in corr and self.year in corr: key=corr.split("_")[0]+"_"+key
+                    if self.scale != "Run2":
+                        if key2 in corr and self.cg in corr and "Run3" in corr: key=corr.split("_")[0]+"_"+key
+                    else:
+                        if key2 in corr and self.cg in corr and self.year in corr: key=corr.split("_")[0]+"_"+key
+                    
                 if 'Up' in key or 'Down' in key:
                     templates[flavor+'_Other_'+key]=Rebin(otherHist, flavor+'_Other_'+key, flavor, self.cg, bng, scale=self.scale)
                     #templates[flavor+'_Other_'+key]=otherHist.Rebin(len(bng)-1, flavor+'_Other_'+key, bng)
@@ -114,8 +118,10 @@ class tmpHandle(object):
                         for corr in shape_corr:
                             key1=keynew.strip('Up')
                             key2=key1.strip('Down')
-
-                            if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
+                            if self.scale != "Run2":
+                                if key2 in corr and self.cg in corr and "Run3" in corr: keynew=corr.split("_")[0]+"_"+keynew
+                            else:
+                                if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
 
                         if 'Up' in key or 'Down' in key:
 
@@ -149,7 +155,7 @@ class tmpHandle(object):
                     
             elif isMultiBin:
                 genBng=[0]+massCutH[:-1]+[-10]
-                #print(genBng)
+                print(genBng)
                 for i in range(len(genBng)-1):
                     nBinsH=int(genBng[i+1]/10.)
                     nBinsL=int(genBng[i]/10.)
@@ -165,8 +171,10 @@ class tmpHandle(object):
                         for corr in shape_corr:
                             key1=keynew.strip('Up')
                             key2=key1.strip('Down')
-
-                            if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
+                            if self.scale != "Run2":
+                                if key2 in corr and self.cg in corr and "Run3" in corr: keynew=corr.split("_")[0]+"_"+keynew
+                            else:
+                                if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
 
                         if 'Up' in key or 'Down' in key:
 
@@ -197,8 +205,11 @@ class tmpHandle(object):
                     for corr in shape_corr:
                         key1=keynew.strip('Up')
                         key2=key1.strip('Down')
-                  
-                        if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
+                        if self.scale != "Run2":
+                            if key2 in corr and self.cg in corr and "Run3" in corr: keynew=corr.split("_")[0]+"_"+keynew
+                        else:
+                            if key2 in corr and self.cg in corr and self.year in corr: keynew=corr.split("_")[0]+"_"+keynew
+
 
                     if 'Up' in key or 'Down' in key:
              
@@ -261,18 +272,24 @@ class tmpHandle(object):
 
             else:
                 tempHist=ROOT.TH1D(flavor+'_tmp', flavor+'_tmp', len(bng)-1,bng)
-                tempHist.Add(templates[flavor+'_DY_S'])
-                tempHist.Add(templates[flavor+'_DY_B'])
+                if isMultiBin:
+                    for i in range(10): tempHist.Add(templates[flavor+'_DY_S'+str(i)])
+                else:
+                    tempHist.Add(templates[flavor+'_DY_S'])
+                    tempHist.Add(templates[flavor+'_DY_B'])
                 tempHist.Add(templates[flavor+'_Other'])
                 dataHist=ROOT.TH1D(flavor+'_data_obs', flavor+'_data_obs', len(bng)-1,bng)
+                #print("flat")
+                #print(bng)
                 for i in range(tempHist.GetNbinsX()+1):
                   
                     mean=tempHist.GetBinContent(i)
+                    #print(mean)
                     #if i == 0: 
                     #    dataHist.SetBinContent(i, mean)
                     #else:
                     val=np.random.poisson(mean, 1)
-                    #print (val)
+                    print (val)
                     dataHist.SetBinContent(i, val[0])
 
             templates[flavor+'_data_obs']=dataHist.Clone()
@@ -297,6 +314,7 @@ class tmpHandle(object):
                 massCut=massCut1
                 massCutH=massCutH1
         self.templates=templates
+        print(templates.keys())
 
     def saveTmps(self, tmpName):
 
@@ -304,12 +322,14 @@ class tmpHandle(object):
         if "mu_DY_S0" in self.templates.keys():
             nev_el_dy_s=[]
             nev_mu_dy_s=[]
+            print("flat")
             for i in range(1,10):
                 nev_el_dy_s.append(self.templates['el_DY_S'+str(i)].Integral())
                 nev_mu_dy_s.append(self.templates['mu_DY_S'+str(i)].Integral())
                 self.templates['el_DY_S'+str(i)].Scale(1.0/nev_el_dy_s[i-1])
                 self.templates['mu_DY_S'+str(i)].Scale(1.0/nev_mu_dy_s[i-1])
                 for key in self.templates.keys():
+                    #print(key)
                     if 'el_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_el_dy_s[i-1])
                     elif 'mu_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_mu_dy_s[i-1])
             
