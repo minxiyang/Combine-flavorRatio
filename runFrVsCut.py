@@ -12,7 +12,7 @@ from func.writeTxt import writeTxt
 def main():
 
     scanRange=(0, 5.)
-    massCuts=range(400, 1201, 150)
+    massCuts=range(400, 1201, 100)
     #massCuts=[1250]
     frsLeft2={}
     frsLeft1={}

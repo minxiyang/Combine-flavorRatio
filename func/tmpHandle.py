@@ -22,11 +22,10 @@ class tmpHandle(object):
         for flavor in ['mu', 'el']:
              
             bng=getBngs(flavor, self.year, self.cg, 150)
-            #bng=np.append(bng[:-1],[2000,2500,3000,3500])
+
             if isMultiBin:
-                #bins=[200,300,400,500,690,900,1250,1610,2000,3500]
                 bng=np.asarray(bins,dtype=np.float64)
-            #print(bng)
+        
             if isFold: 
                 if massCutH<3500:bins=[1, massCut, massCutH, 3500]
                 else: bins=[1, massCut, 3500]
@@ -70,7 +69,6 @@ class tmpHandle(object):
 
             f_other.Close()
             templates[flavor+'_Other']=Rebin(otherHist, flavor+'_Other', flavor, self.cg, bng, scale=self.scale)
-            #templates[flavor+'_Other']=otherHist.Rebin(len(bng)-1, flavor+'_Other', bng)
 
             for key in otherHistvar.keys():
  
@@ -87,12 +85,11 @@ class tmpHandle(object):
                     
                 if 'Up' in key or 'Down' in key:
                     templates[flavor+'_Other_'+key]=Rebin(otherHist, flavor+'_Other_'+key, flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_Other_'+key]=otherHist.Rebin(len(bng)-1, flavor+'_Other_'+key, bng)
+       
                 else:
                     templates[flavor+'_Other_'+key+'Up']=Rebin(otherHist, flavor+'_Other_'+key+'Up', flavor, self.cg, bng, scale=self.scale)
                     templates[flavor+'_Other_'+key+'Down']=Rebin(otherHist, flavor+"_Other_"+key+'Down', flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_Other_'+key+'Up']=otherHist.Rebin(len(bng)-1, flavor+'_Other_'+key+'Up', bng)
-                    #templates[flavor+'_Other_'+key+'Down']=otherHist.Rebin(len(bng)-1, flavor+'_Other_'+key+'Down', bng)
+        
                 
             nBins=int(massCut/10.)
             if isSingleBin:
@@ -103,13 +100,10 @@ class tmpHandle(object):
                 else:
                     dy_sig=dyHist2D.ProjectionX("sigx", nBinsL+1, nBinsH)
                     templates[flavor+'_DY_S']=Rebin(dy_sig, flavor+'_DY_S', flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_DY_S']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S', bng)
                     dy_bkgL=dyHist2D.ProjectionX("bkgxl", 15, nBinsL)
                     templates[flavor+'_DY_BL']=Rebin(dy_bkgL, flavor+'_DY_BL', flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_DY_BL']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL', bng)
                     dy_bkgH=dyHist2D.ProjectionX("bkgxh", nBinsH+1, -1)
                     templates[flavor+'_DY_BH']=Rebin(dy_bkgH, flavor+'_DY_BH', flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_DY_BH']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH', bng)
 
                     for key in dyHist2Dvar.keys():
 
@@ -127,12 +121,9 @@ class tmpHandle(object):
 
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S_'+keynew]=Rebin(dy_sig, flavor+'_DY_S_'+keynew, flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_S_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew, bng)
                             dy_bkgL=dyHist2D.ProjectionX("bkgxl", 15, nBinsL)
                             templates[flavor+'_DY_BL_'+keynew]=Rebin(dy_bkgL, flavor+'_DY_BL_'+keynew, flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_BL_'+keynew]=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew, bng)
                             dy_bkgH=dyHist2D.ProjectionX("bkgxh", nBinsH+1, -1)
-                            #templates[flavor+'_DY_BH_'+keynew]=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew, bng)
                             templates[flavor+'_DY_BH_'+keynew]=Rebin(dy_bkgH, flavor+'_DY_BH_'+keynew, flavor, self.cg, bng, scale=self.scale)
 
                         else:
@@ -140,18 +131,12 @@ class tmpHandle(object):
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S_'+keynew+'Up']=Rebin(dy_sig, flavor+'_DY_S_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                             templates[flavor+'_DY_S_'+keynew+'Down']=Rebin(dy_sig, flavor+'_DY_S_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_S_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Up', bng)
-                            #templates[flavor+'_DY_S_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Down', bng)
                             dy_bkgL=dyHist2D.ProjectionX("bkgx", 15, nBinsL)
                             templates[flavor+'_DY_BL_'+keynew+'Up']=Rebin(dy_bkgL, flavor+'_DY_BL_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                             templates[flavor+'_DY_BL_'+keynew+'Down']=Rebin(dy_bkgL, flavor+'_DY_BL_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_BL_'+keynew+'Up']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew+'Up', bng)
-                            #templates[flavor+'_DY_BL_'+keynew+'Down']=dy_bkgL.Rebin(len(bng)-1, flavor+'_DY_BL_'+keynew+'Down', bng)
                             dy_bkgH=dyHist2D.ProjectionX("bkgx", nBinsH+1, -1)
                             templates[flavor+'_DY_BH_'+keynew+'Up']=Rebin(dy_bkgH, flavor+'_DY_BH_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                             templates[flavor+'_DY_BH_'+keynew+'Down']=Rebin(dy_bkgH, flavor+'_DY_BH_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_BH_'+keynew+'Up']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew+'Up', bng)
-                            #templates[flavor+'_DY_BH_'+keynew+'Down']=dy_bkgH.Rebin(len(bng)-1, flavor+'_DY_BH_'+keynew+'Down', bng)
                     
             elif isMultiBin:
                 genBng=[0]+massCutH[:-1]+[-10]
@@ -162,7 +147,6 @@ class tmpHandle(object):
 
                     dy_sig=dyHist2D.ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
                     templates[flavor+'_DY_S'+str(i)]=Rebin(dy_sig, flavor+'_DY_S'+str(i), flavor, self.cg, bng, scale=self.scale)
-                    #templates[flavor+'_DY_S'+str(i)]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i), bng)
 
                     for key in dyHist2Dvar.keys():
 
@@ -180,21 +164,16 @@ class tmpHandle(object):
 
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S'+str(i)+'_'+keynew]=Rebin(dy_sig, flavor+'_DY_S'+str(i)+'_'+keynew, flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_S'+str(i)+'_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew, bng)
                         else:
                             dy_sig=dyHist2Dvar[key].ProjectionX("sigx"+str(i), nBinsL+1, nBinsH)
                             templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Up']=Rebin(dy_sig, flavor+'_DY_S'+str(i)+'_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                             templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Down']=Rebin(dy_sig, flavor+'_DY_S'+str(i)+'_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                            #templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Up', bng)
-                            #templates[flavor+'_DY_S'+str(i)+'_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S'+str(i)+'_'+keynew+'Down', bng)
 
 
             else:
                 dy_sig=dyHist2D.ProjectionX("sigx", nBins+1, -1)
                 templates[flavor+'_DY_S']=Rebin(dy_sig, flavor+'_DY_S', flavor, self.cg, bng, scale=self.scale)
-                #templates[flavor+'_DY_S']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S', bng)
                 dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
-                #templates[flavor+'_DY_B']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B', bng)
                 templates[flavor+'_DY_B']=Rebin(dy_bkg, flavor+'_DY_B', flavor, self.cg, bng, scale=self.scale)
 
 
@@ -215,23 +194,17 @@ class tmpHandle(object):
              
                         dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBins+1, -1)
                         templates[flavor+'_DY_S_'+keynew]=Rebin(dy_sig, flavor+'_DY_S_'+keynew, flavor, self.cg, bng, scale=self.scale)
-                        #templates[flavor+'_DY_S_'+keynew]=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew, bng)
                         dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
                         templates[flavor+'_DY_B_'+keynew]=Rebin(dy_bkg, flavor+'_DY_B_'+keynew, flavor, self.cg, bng, scale=self.scale)
-                        #templates[flavor+'_DY_B_'+keynew]=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew, bng)
 
                     else:
  
                         dy_sig=dyHist2Dvar[key].ProjectionX("sigx", nBins+1, -1)
                         templates[flavor+'_DY_S_'+keynew+'Up']=Rebin(dy_sig, flavor+'_DY_S_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                         templates[flavor+'_DY_S_'+keynew+'Down']=Rebin(dy_sig, flavor+'_DY_S_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                        #templates[flavor+'_DY_S_'+keynew+'Up']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Up', bng)
-                        #templates[flavor+'_DY_S_'+keynew+'Down']=dy_sig.Rebin(len(bng)-1, flavor+'_DY_S_'+keynew+'Down', bng)
                         dy_bkg=dyHist2D.ProjectionX("bkgx", 15, nBins)
                         templates[flavor+'_DY_B_'+keynew+'Up']=Rebin(dy_bkg, flavor+'_DY_B_'+keynew+'Up', flavor, self.cg, bng, scale=self.scale)
                         templates[flavor+'_DY_B_'+keynew+'Down']=Rebin(dy_bkg, flavor+'_DY_B_'+keynew+'Down', flavor, self.cg, bng, scale=self.scale)
-                        #templates[flavor+'_DY_B_'+keynew+'Up']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew+'Up', bng)
-                        #templates[flavor+'_DY_B_'+keynew+'Down']=dy_bkg.Rebin(len(bng)-1, flavor+'_DY_B_'+keynew+'Down', bng)
 
             if not istoy and self.scale=="Run2":
 
@@ -279,17 +252,11 @@ class tmpHandle(object):
                     tempHist.Add(templates[flavor+'_DY_B'])
                 tempHist.Add(templates[flavor+'_Other'])
                 dataHist=ROOT.TH1D(flavor+'_data_obs', flavor+'_data_obs', len(bng)-1,bng)
-                #print("flat")
-                #print(bng)
+             
                 for i in range(tempHist.GetNbinsX()+1):
                   
                     mean=tempHist.GetBinContent(i)
-                    #print(mean)
-                    #if i == 0: 
-                    #    dataHist.SetBinContent(i, mean)
-                    #else:
                     val=np.random.poisson(mean, 1)
-                    print (val)
                     dataHist.SetBinContent(i, val[0])
 
             templates[flavor+'_data_obs']=dataHist.Clone()
@@ -314,7 +281,6 @@ class tmpHandle(object):
                 massCut=massCut1
                 massCutH=massCutH1
         self.templates=templates
-        print(templates.keys())
 
     def saveTmps(self, tmpName):
 
@@ -329,7 +295,6 @@ class tmpHandle(object):
                 self.templates['el_DY_S'+str(i)].Scale(1.0/nev_el_dy_s[i-1])
                 self.templates['mu_DY_S'+str(i)].Scale(1.0/nev_mu_dy_s[i-1])
                 for key in self.templates.keys():
-                    #print(key)
                     if 'el_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_el_dy_s[i-1])
                     elif 'mu_DY_S'+str(i)+'_' in key: self.templates[key].Scale(1.0/nev_mu_dy_s[i-1])
             

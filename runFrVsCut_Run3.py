@@ -12,7 +12,7 @@ from func.writeTxt import writeTxt
 def main():
 
     scanRange=(0, 5.)
-    massCuts=range(400, 1201, 200)
+    massCuts=range(400, 1201, 100)
     #massCuts=[1250]
     frsLeft2={}
     frsLeft1={}
@@ -102,10 +102,10 @@ def main():
     for year in ["Run3"]:
         for cg in ["bb","be"]:
             key=year+cg
-            plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, key+"v2")
+            plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, key)
 
     key="Run2and3Combine"    
-    plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, "Run2and3Combinev2")    
+    plotFrVsCut(frsLeft2[key], frsLeft1[key], frsMed[key], frsRight1[key], frsRight2[key], massCuts, "run2And3Combine")    
 
 if __name__=="__main__":
     main()
