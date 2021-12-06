@@ -82,7 +82,7 @@ def plotBinByBinFR(year, cg, bng, med, low, high, default_FR=[0], default_err=[0
     if year in lumi_mu.keys(): latex.DrawLatex(0.38, 0.945, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
     elif year=="Run2": latex.DrawLatex(0.38, 0.945, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
     elif year=="Run2and3": latex.DrawLatex(0.38, 0.945, "300 fb^{-1} (13.6 TeV, #mu#mu ), 300 fb^{-1} (13.6 TeV, ee)")
-    else: latex.DrawLatex(0.38, 0.945, "3000 fb^{-1} (13.6 TeV, #mu#mu ), 3000 fb^{-1} (13.6 TeV, ee)")
+    else: latex.DrawLatex(0.35, 0.945, "3000 fb^{-1} (14 TeV, #mu#mu ), 3000 fb^{-1} (14 TeV, ee)")
     latex.SetTextSize(0.05)
     if cg == "be":latex.DrawLatex(0.35,0.72,"at least one endcap lepton")
     elif cg == "bb": latex.DrawLatex(0.35,0.72,"two barrel leptons")

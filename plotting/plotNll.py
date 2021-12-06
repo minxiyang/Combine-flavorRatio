@@ -71,6 +71,7 @@ def plotNll(year, cg, massCut, isLabel, output, ith, **rootFiles):
     latex.SetNDC(True)
     if year in lumi_mu.keys(): latex.DrawLatex(0.9, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
     elif year == "Run3": latex.DrawLatex(0.9, 0.96, "160 fb^{-1} (13.6 TeV, #mu#mu ), 160 fb^{-1} (13.6 TeV, ee)")
+    elif year == "Phase2": latex.DrawLatex(0.9, 0.96, "3000 fb^{-1} (14 TeV, #mu#mu ), 3000 fb^{-1} (14 TeV, ee)")
     elif year == "Run3and2": latex.DrawLatex(0.9, 0.96, "300 fb^{-1} (13.6 TeV, #mu#mu ), 300 fb^{-1} (13.6 TeV, ee)")
     else: latex.DrawLatex(0.9, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
     #print("plots/NLL/%s.pdf"%(output+year+cg))

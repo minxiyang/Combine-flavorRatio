@@ -8,6 +8,7 @@ def plotFrVsCut(frLeft2, frLeft1, frMed, frRight1, frRight2, massCut, output):
     setTDRStyle()
     ROOT.gStyle.SetOptStat(0) 
     frLeft2=np.asarray(frLeft2, dtype=np.float64)
+    #print(frLeft2)
     frLeft1=np.asarray(frLeft1, dtype=np.float64)
     frRight2=np.asarray(frRight2, dtype=np.float64)
     frRight1=np.asarray(frRight1, dtype=np.float64)
@@ -62,12 +63,12 @@ def plotFrVsCut(frLeft2, frLeft1, frMed, frRight1, frRight2, massCut, output):
     elif "2017" in output: year="2017"
     elif "2016" in output: year="2016"
     elif "run2And3" in output: year="run2And3"
-    elif "phase2" in output: year="phase2"
+    elif "Phase2" in output: year="phase2"
     else: year="run2"
     if year in lumi_mu.keys(): latex.DrawLatex(0.9, 0.96, "%s fb^{-1} (13 TeV, #mu#mu ), %s fb^{-1} (13 TeV, ee)"%(str(int(lumi_mu[year]/1000)),str(int(lumi_el[year]/1000))))
     elif year=="run3":latex.DrawLatex(0.9, 0.96, "160 fb^{-1} (13.6 TeV, #mu#mu ), 160 fb^{-1} (13.6 TeV, ee)")
     elif year=="run2And3":latex.DrawLatex(0.9, 0.96, "300 fb^{-1} (13.6 TeV, #mu#mu ), 300 fb^{-1} (13.6 TeV, ee)")
-    elif year=="phase2":latex.DrawLatex(0.9, 0.96, "3000 fb^{-1} (13.6 TeV, #mu#mu ), 3000 fb^{-1} (13.6 TeV, ee)")
+    elif year=="phase2":latex.DrawLatex(0.9, 0.96, "3000 fb^{-1} (14 TeV, #mu#mu ), 3000 fb^{-1} (14 TeV, ee)")
     else: latex.DrawLatex(0.9, 0.96, "140 fb^{-1} (13 TeV, #mu#mu ), 137 fb^{-1} (13 TeV, ee)")
 
     c.Update()
