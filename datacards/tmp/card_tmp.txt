@@ -25,8 +25,9 @@ _Smear                   shape     1.0                 1.0                1.0   
 _Prefire                 shape     -                   -                  -                   1.0                  1.0                  1.0
 _PUScale                 shape     -                   -                  -                   1.0                  1.0                  1.0
 _MuonID                  shape     1.0                 1.0                1.0                 -                    -                    -
+_eff                     shape     -                   -                  -                   1.0                  1.0                  1.0
 _trig                    lnN       -                   Trigv              Trigv               -                    -                    -
-_eff                     lnN       -                   -                  -                   Effv                 Effv                 Effv
+#_eff                     lnN       -                   -                  -                   Effv                 Effv                 Effv
 R1                       param     acc_eff_med         acc_eff_err
 #Rel                      param     nev_el_dy_s         data_uncer
 -----------------------------------------------------------------------------------------------------------------------------------------------              
