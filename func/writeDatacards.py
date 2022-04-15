@@ -1,6 +1,6 @@
 from Parameters import eff_corr, post_fit_nev, def_bng
 import ROOT
-
+import math
 
 def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=False, massCut=0):
 
@@ -40,6 +40,7 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     else:
         nev_el_dy_s=templates['el_DY_S'].Integral()
         tmptxt=tmptxt.replace('nev_el_dy_s',str(nev_el_dy_s))
+        tmptxt=tmptxt.replace('nev_el_dy_s1',str(3.*nev_el_dy_s))
         nev_mu_dy_s=templates['mu_DY_S'].Integral()
         tmptxt=tmptxt.replace('nev_mu_dy_s',str(nev_mu_dy_s))
     if "el_DY_BL" in templates.keys():
@@ -69,7 +70,11 @@ def writeDatacards(cardName, fileName, year, cg, templates, acc_eff, isFold=Fals
     else:
         tmptxt=tmptxt.replace('acc_eff_med',str(acc_eff[0]))
         tmptxt=tmptxt.replace('acc_eff_err',str(acc_eff[1]))
-    Effv=eff_corr["eff"+cg]
+    Effv=1.+math.sqrt(1./50.)
+    #Effv=eff_corr["eff"+cg]
+    #Effv=float(Effv)
+    #if year == "Run3": Effv=1.+3*(Effv-1)/8.
+    Effv=str(Effv)
     tmptxt=tmptxt.replace('Effv',Effv)
     if year == "Run3": yr="Run3"
     else: yr=year

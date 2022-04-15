@@ -9,7 +9,7 @@ import numpy as np
 def fit_func(p, x, vals, errs):
 
    a0, a1, a2, a3, a4= p
-   y = a0 * x**a1 * np.exp(a2*x + a3*x**2 + a4*x**3)
+   y = x**a1 * np.exp(a0 + a2*x + a3*x**2 + a4*x**3)
    res = (vals - y)/errs
 
    return res
@@ -77,8 +77,8 @@ def doFit(fileName, flavor, cg, year):
     #mass = range(410, 3501, 10)
     #mass  = np.asarray(mass)
     #print(mass[309])
-    if "DY" in fileName: para0 = [5.95611817e+12, -4.02139968e+00, -3.56502089e-04, -1.24234837e-07, -2.16295719e-11]
-    else: para0 = [1e10, -3, -1e-2, -1e-10, -2.35e-10] 
+    if "DY" in fileName: para0 = [30., -4.02139968e+00, -3.56502089e-04, -1.24234837e-07, -2.16295719e-11]
+    else: para0 = [23, -3, -1e-2, -1e-10, -2.35e-10] 
     #print(fit_func(para0, 500))
     para0 = np.asarray(para0)
     para = leastsq(fit_func, para0, args=(mass, vals, errs))

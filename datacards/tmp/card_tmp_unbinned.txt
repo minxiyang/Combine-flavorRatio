@@ -1,0 +1,33 @@
+imax * numbbr of bins
+jmax * numbbr of processes minus 1
+kmax * numbbr of nuisance parameters
+-----------------------------------------------------------------------------------------------------------------------------------------------
+shapes data_obs                signal              datacards/mutmp_cut.root mutmp:data_obs
+shapes mu_DY_S                 signal              datacards/mutmp_cut.root mutmp:mutmp_DYpdf_mucg_extra
+shapes mu_DY_B                 signal              datacards/mutmp_cut.root mutmp:mutmp_DYpdf_mucg_extra_bkg
+shapes mu_Other                signal              datacards/mutmp_cut.root mutmp:mutmp_Otherpdf_mucg_extra
+shapes data_obs                control             datacards/eltmp_cut.root eltmp:data_obs
+shapes el_DY_S                 control             datacards/eltmp_cut.root eltmp:eltmp_DYpdf_elcg_extra
+shapes el_DY_B                 control             datacards/eltmp_cut.root eltmp:eltmp_DYpdf_elcg_extra_bkg
+shapes el_Other                control             datacards/eltmp_cut.root eltmp:eltmp_Otherpdf_elcg_extra
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin          signal            control  
+observation  -1                -1
+-----------------------------------------------------------------------------------------------------------------------------------------------
+bin                               signal            signal             signal             control         control             control
+process                           mu_DY_S           mu_DY_B            mu_Other           el_DY_S         el_DY_B             el_Other
+process                           0                 1                  2                  3               4                   5
+rate                              1.0               nev_mu_dy_b        nev_mu_o           1.0             nev_el_dy_b         nev_el_o
+-----------------------------------------------------------------------------------------------------------------------------------------------
+R1                  rateParam     signal              mu_DY_S            acc_eff_med
+Rmu                 rateParam     signal              mu_DY_S            (@0) Rel
+Rel                 rateParam     control             el_DY_S            nev_el_dy_s
+-----------------------------------------------------------------------------------------------------------------------------------------------
+_trig              lnN             Trigv             Trigv               Trigv            -               -                   -
+_eff               lnN             -                 -                   -                Effv            Effv                Effv
+R1                 param           acc_eff_med       acc_eff_err
+IDvar              param             0               1.0
+mu_massvar            param             0               1.0
+el_massvar            param             0               1.0
+
+
