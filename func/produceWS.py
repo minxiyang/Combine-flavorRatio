@@ -41,7 +41,7 @@ def produceWS(cut):
                         #histo_reso = f.Get(histName+cg+"_Smear")
                         if flavor == "mu":
                             histo_reso = f.Get(histName+cg+"_Smear")
-                            hist_ID = f.Get(histName+cg+"_MuonID")
+                            histo_ID = f.Get(histName+cg+"_MuonID")
                         else:
                             histo_puup = f.Get(histName+cg+"_PUScaleUp")
                             histo_pudown = f.Get(histName+cg+"_PUScaleDown")
@@ -114,7 +114,7 @@ def produceWS(cut):
                             histo_predown = M_predown.ProjectionX(prefix+"17", cut/10+1, -1)
                             histo_predown_b = M_predown.ProjectionX(prefix+"18", 15, cut/10)
                     
-
+                    '''
                     for i in range(0, 150):
                             histo.SetBinContent(i, 0)
                             histo_up.SetBinContent(i, 0)
@@ -128,7 +128,7 @@ def produceWS(cut):
                                 histo_pudown.SetBinContent(i, 0)
                                 histo_preup.SetBinContent(i, 0)
                                 histo_predown.SetBinContent(i, 0)
-
+                    '''
                     for i in range(1, histo.GetNbinsX()+1):
                         if histo.GetBinContent(i)<0: histo.SetBinContent(i, 0)
                         if histo_up.GetBinContent(i)<0: histo_up.SetBinContent(i, 0)
@@ -253,7 +253,7 @@ def produceWS(cut):
                         y7 = histo_predown.Integral()
                         print((y1,y2,y3,y4,y5,y6,y7))
                     if process=="DY":
-                        y1 = histo_b.Integral(40,60)
+                        y1 = histo_b.Integral()
                         y2 = histo_up_b.Integral()
                         y3 = histo_down_b.Integral()
                         if flavor == "mu":
@@ -400,11 +400,10 @@ def produceWS(cut):
                             datahist_reso_b = ROOT.RooDataHist(prefix+"Mass_"+cg+"_smear_bkg", prefix+"Mass_"+cg+"_smear_bkg", ROOT.RooArgList(massVar), ROOT.RooFit.Import(histo_reso_b))
                             histpdf_reso_b = ROOT.RooHistPdf(prefix+"pdf_"+cg+"_smear_bkg", prefix+"pdf_"+cg+"_smear_bkg", ROOT.RooArgSet(massVar), datahist_reso_b)
                             addToWs(ws, histpdf_reso_b)
-                            func1_b = ROOT.RooFormulaVar(prefix+"func1_bkg"+cg, prefix+"func1_bkg"+cg, "1. - 0.25*(3*@0*@0*@0*@0*@0*@0 - 10*@0*@0*@0*@0+15*@0*@0) - abs(@1)", ROOT.RooArgList(mass_var,ID_var))
-                            func2_b = ROOT.RooFormulaVar(prefix+"func2_bkg"+cg, prefix+"func2_bkg"+cg, "((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 + 0.5*@0)", ROOT.RooArgList(mass_var))
-                            func3_b = ROOT.RooFormulaVar(prefix+"func3_bkg"+cg, prefix+"func3_bkg"+cg, "((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 - 0.5*@0)", ROOT.RooArgList(mass_var))
-                            func4_b = ROOT.RooFormulaVar(prefix+"func4_bkg"+cg, prefix+"func4_bkg"+cg, "abs(@0)", ROOT.RooArgList(ID_var))
-
+                            func1_b = ROOT.RooFormulaVar(prefix+"func1_bkg"+cg, prefix+"func1_bkg"+cg, "1. - (abs(@0)<1)*0.125*(3*@0*@0*@0*@0*@0*@0 - 10*@0*@0*@0*@0+15*@0*@0) -(abs(@1)<1)*0.125*(3*@1*@1*@1*@1*@1*@1 - 10*@1*@1*@1*@1+15*@1*@1) - (abs(@0)>1)*abs(@0) - (abs(@1)>1)*abs(@1)", ROOT.RooArgList(mass_var,ID_var))
+                            func2_b = ROOT.RooFormulaVar(prefix+"func2_bkg"+cg, prefix+"func2_bkg"+cg, "(abs(@0)<1)*0.5*((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 + @0) + (@0>1)*@0", ROOT.RooArgList(mass_var))
+                            func3_b = ROOT.RooFormulaVar(prefix+"func3_bkg"+cg, prefix+"func3_bkg"+cg, "(abs(@0)<1)*0.5*((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 - @0) - (@0<-1)*@0", ROOT.RooArgList(mass_var))
+                            func4_b = ROOT.RooFormulaVar(prefix+"func4_bkg"+cg, prefix+"func4_bkg"+cg, "(abs(@0)<1)*((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0) + (abs(@0)>1)*abs(@0)", ROOT.RooArgList(ID_var))
                             extra_b = ROOT.RooAddPdf(prefix+"pdf_"+cg+"_extra_bkg", prefix+"pdf_"+cg+"_extra_bkg", ROOT.RooArgList(histpdf_b, histpdf_up_b, histpdf_down_b, histpdf_ID_b), ROOT.RooArgList(func1_b, func2_b, func3_b, func4_b))
                             addToWs(ws, extra_b)
                         else:
@@ -420,9 +419,9 @@ def produceWS(cut):
                             addToWs(ws, histpdf_pudown_b)
                             addToWs(ws, histpdf_preup_b)
                             addToWs(ws, histpdf_predown_b)
-                            func1_b = ROOT.RooFormulaVar(prefix+"func1_bkg"+cg, prefix+"func1_bkg"+cg, "1. - 0.25*(3*@0*@0*@0*@0*@0*@0 - 10*@0*@0*@0*@0+15*@0*@0)", ROOT.RooArgList(mass_var,ID_var))
-                            func2_b = ROOT.RooFormulaVar(prefix+"func2_bkg"+cg, prefix+"func2_bkg"+cg, "((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 + 0.5*@0)", ROOT.RooArgList(mass_var))
-                            func3_b = ROOT.RooFormulaVar(prefix+"func3_bkg"+cg, prefix+"func3_bkg"+cg, "((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 - 0.5*@0)", ROOT.RooArgList(mass_var))
+                            func1_b = ROOT.RooFormulaVar(prefix+"func1_bkg"+cg, prefix+"func1_bkg"+cg, "1. - (abs(@0)<1)*0.125*(3*@0*@0*@0*@0*@0*@0 - 10*@0*@0*@0*@0+15*@0*@0) - (abs(@0)>1)*abs(@0)", ROOT.RooArgList(mass_var))
+                            func2_b = ROOT.RooFormulaVar(prefix+"func2_bkg"+cg, prefix+"func2_bkg"+cg, "(abs(@0)<1)*0.5*((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 + @0)+ (@0>1)*@0", ROOT.RooArgList(mass_var))
+                            func3_b = ROOT.RooFormulaVar(prefix+"func3_bkg"+cg, prefix+"func3_bkg"+cg, "(abs(@0)<1)*0.5*((3./8.)*@0*@0*@0*@0*@0*@0 - 1.25*@0*@0*@0*@0 + (15./8.)*@0*@0 - @0)- (@0<-1)*@0", ROOT.RooArgList(mass_var))
                             extra_b = ROOT.RooAddPdf(prefix+"pdf_"+cg+"_extra_bkg", prefix+"pdf_"+cg+"_extra_bkg", ROOT.RooArgList(histpdf_b, histpdf_up_b, histpdf_down_b), ROOT.RooArgList(func1_b, func2_b, func3_b))
                             addToWs(ws, extra_b)
                 ws.writeToFile("datacards/"+flavor+cg+year+"_"+str(cut)+".root")
