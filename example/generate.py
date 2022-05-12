@@ -15,9 +15,9 @@ h_sig = ROOT.TH1D("sig", "", 50, 0, 100)
 
 for x in range(1, 100, 2):
 
-    val = 100.*np.exp(-x/100.)
+    val = 100.*np.exp(-x/100.)*2
     h_bkg.SetBinContent((x+1)/2, val)
-    val = (500./(5*np.sqrt(2*np.pi)))*np.exp(-(x-50)**2/50.)
+    val = (500./(5*np.sqrt(2*np.pi)))*np.exp(-(x-50)**2/50.)*2
     h_sig.SetBinContent((x+1)/2, val)
 for x in bkgs:
     h_data.Fill(x)
