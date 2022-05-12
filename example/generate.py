@@ -13,7 +13,7 @@ h_data = ROOT.TH1D("data_obs", "toy data", 100, 0, 100)
 h_bkg = ROOT.TH1D("bkg", "", 100, 0, 100)
 h_sig = ROOT.TH1D("sig", "", 100, 0, 100)
 
-for x in range(1, 100):
+for x in range(1, 101):
 
     val = 100.*np.exp(-x/100.)
     h_bkg.SetBinContent(x, val)
@@ -32,9 +32,9 @@ stack.Add(h_bkg)
 stack.Add(h_sig)
 c = ROOT.TCanvas('c', 'c', 800, 800)
 h_data.SetMarkerStyle(8)
-h_data.Draw("p")
-stack.Draw("samehist")
-#h_data.Draw("samep")
+#h_data.Draw("p")
+stack.Draw("hist")
+h_data.Draw("samep")
 c.Print("example.pdf")
 
 
