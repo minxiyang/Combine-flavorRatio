@@ -9,7 +9,7 @@ nsig = np.random.poisson(Nsig, 1)
 bkgs = np.random.exponential(100, nbkg)
 sigs = np.random.normal(50, 5, nsig)
 
-data = ROOT.TH1D("data", "data", 100, 0, 100)
+data = ROOT.TH1D("data", "data", 50, 0, 100)
 
 for x in bkgs:
     data.Fill(x)
