@@ -33,7 +33,7 @@ stack.Add(h_sig)
 c = ROOT.TCanvas('c', 'c', 800, 800)
 h_data.SetMarkerStyle(8)
 #h_data.Draw("p")
-stack.Draw("l")
+stack.Draw("lhist")
 h_data.Draw("samep")
 c.Print("example.pdf")
 
