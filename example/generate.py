@@ -2,7 +2,7 @@ import numpy as np
 import ROOT
 
 
-Nbkg = 5000
+Nbkg = 10000
 Nsig = 300
 nbkg = np.random.poisson(Nbkg, 1)
 nsig = np.random.poisson(Nsig, 1)
@@ -18,7 +18,7 @@ for x in sigs:
     data.Fill(x)
 
 c = ROOT.TCanvas('c', 'c', 800, 800)
-data.SetMarkerSize(8)
+data.SetMarkerStyle(8)
 data.Draw("p")
 c.Print("example.pdf")
 
