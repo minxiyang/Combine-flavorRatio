@@ -5,7 +5,7 @@ import ROOT
 def main():
 
     Nbkg = 10000
-    Nsig = 200
+    Nsig = 500
     nbkg = np.random.poisson(Nbkg, 1)
     nsig = np.random.poisson(Nsig, 1)
     bkgs = np.random.exponential(100, nbkg)
