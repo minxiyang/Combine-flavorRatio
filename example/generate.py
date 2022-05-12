@@ -3,11 +3,11 @@ import ROOT
 
 
 Nbkg = 10000
-Nsig = 300
+Nsig = 500
 nbkg = np.random.poisson(Nbkg, 1)
 nsig = np.random.poisson(Nsig, 1)
 bkgs = np.random.exponential(100, nbkg)
-sigs = np.random.normal(50, 10, nsig)
+sigs = np.random.normal(50, 5, nsig)
 
 data = ROOT.TH1D("data", "data", 100, 0, 100)
 
