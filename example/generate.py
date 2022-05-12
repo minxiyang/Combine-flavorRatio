@@ -2,8 +2,8 @@ import numpy as np
 import ROOT
 
 
-Nbkg = 500
-Nsig = 30
+Nbkg = 5000
+Nsig = 300
 nbkg = np.random.poisson(Nbkg, 1)
 nsig = np.random.poisson(Nsig, 1)
 bkgs = np.random.exponential(100, nbkg)
@@ -18,6 +18,7 @@ for x in sigs:
     data.Fill(x)
 
 c = ROOT.TCanvas('c', 'c', 800, 800)
+data.SetMarkerSize(8)
 data.Draw("p")
 c.Print("example.pdf")
 
