@@ -16,9 +16,9 @@ h_sig = ROOT.TH1D("sig", "", 100, 0, 100)
 for x in range(1, 100):
 
     val = 100.*np.exp(-x/100.)
-    h_bkg.SetBinContent((x+1)/2, val)
+    h_bkg.SetBinContent(x, val)
     val = (500./(5*np.sqrt(2*np.pi)))*np.exp(-(x-50)**2/50.)
-    h_sig.SetBinContent((x+1)/2, val)
+    h_sig.SetBinContent(x, val)
 for x in bkgs:
     h_data.Fill(x)
 
@@ -32,9 +32,9 @@ stack.Add(h_bkg)
 stack.Add(h_sig)
 c = ROOT.TCanvas('c', 'c', 800, 800)
 h_data.SetMarkerStyle(8)
-#h_data.Draw("p")
-stack.Draw("lhist")
-h_data.Draw("samep")
+h_data.Draw("p")
+stack.Draw("samehist")
+#h_data.Draw("samep")
 c.Print("example.pdf")
 
 
