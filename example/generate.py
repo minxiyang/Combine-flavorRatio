@@ -11,16 +11,16 @@ def main():
     bkgs = np.random.exponential(100, nbkg)
     sigs = np.random.normal(50, 5, nsig)
 
-    h_data = ROOT.TH1D("data_obs", "toy data", 50, 0, 100)
-    h_bkg = ROOT.TH1D("bkg", "", 50, 0, 100)
-    h_sig = ROOT.TH1D("sig", "", 50, 0, 100)
+    h_data = ROOT.TH1D("data_obs", "toy data", 100, 0, 100)
+    h_bkg = ROOT.TH1D("bkg", "", 100, 0, 100)
+    h_sig = ROOT.TH1D("sig", "", 100, 0, 100)
 
-    for x in range(1, 100, 2):
+    for x in range(1, 101):
 
-        val = 100.*np.exp(-x/100.)*2
-        h_bkg.SetBinContent((x+1)/2, val)
-        val = (500./(5*np.sqrt(2*np.pi)))*np.exp(-(x-50)**2/50.)*2
-        h_sig.SetBinContent((x+1)/2, val)
+        val = 100.*np.exp(-x/100.)
+        h_bkg.SetBinContent(x, val)
+        val = (500./(5*np.sqrt(2*np.pi)))*np.exp(-(x-50)**2/50.)
+        h_sig.SetBinContent(x, val)
     for x in bkgs:
         h_data.Fill(x)
 
@@ -63,6 +63,7 @@ def main():
     massVar.setBins(100)
     m_arg=ROOT.RooArgSet(massVar, "m_arg")
     dataset=ROOT.RooDataSet("data", "data", m_arg)
+    print(len(data))
     for m in data:
         m = ROOT.Double(m)
         ROOT.RooAbsRealLValue.__assign__(massVar, m)
