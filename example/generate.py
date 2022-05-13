@@ -39,11 +39,11 @@ def main():
     c.Print("example.pdf")
 
     print("observed data is:")
-    print(h_data.Integral(1,51))
+    print(h_data.Integral(1,101))
     print("signal is:")
-    print(h_sig.Integral(1,51))
+    print(h_sig.Integral(1,101))
     print("background is:")
-    print(h_bkg.Integral(1,51))
+    print(h_bkg.Integral(1,101))
 
     f = ROOT.TFile.Open("TH1_test.root", "RECREATE")
     h_data.Write()
